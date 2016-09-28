@@ -6,3 +6,6 @@ Para unir master con branch que se usa o se modifico ------>
 git cheackut master
 git merge "nombre de branch"
 
+Para unir master (u otro branch) con github
+git push origin "nombre de branch"
+
