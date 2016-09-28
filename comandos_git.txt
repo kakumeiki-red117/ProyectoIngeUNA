@@ -1,0 +1,3 @@
+git checkout "nombre de branch" ---> para ubicarse en branch
+git add "nombre archivo"  --> 
+git commit  -----> guarda archivos creados y modificados en branch
