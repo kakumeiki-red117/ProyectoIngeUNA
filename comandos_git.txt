@@ -9,3 +9,5 @@ git merge "nombre de branch"
 Para unir master (u otro branch) con github
 git push origin "nombre de branch"
 
+Al editar en cmd un documento de texto, 
+al terminar se le da esc, luego ":wq" + enter y termina de editarlo
