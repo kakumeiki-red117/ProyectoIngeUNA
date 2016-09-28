@@ -1,3 +1,8 @@
 git checkout "nombre de branch" ---> para ubicarse en branch
 git add "nombre archivo"  --> 
 git commit  -----> guarda archivos creados y modificados en branch
+
+Para unir master con branch que se usa o se modifico ------>
+git cheackut master
+git merge "nombre de branch"
+
