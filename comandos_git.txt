@@ -13,5 +13,4 @@ Al editar en cmd un documento de texto,
 al terminar se le da esc, luego ":wq" + enter y termina de editarlo
 
 para subir a remote
-git remote add master origin
 git push origin master
