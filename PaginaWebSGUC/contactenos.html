@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>SGUC</title>
+
+    <link rel="stylesheet" href="style/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src='js/js.js'></script>
+</head>
+
+
+<body>
+    <div>
+        <header>
+            <nav>
+                <ul>
+                    <a href='informes.html'><li>Informes</li></a>
+                    <a href='servicios.html'><li>Servicios</li></a>
+                </ul>
+
+                <a href='index.html'><img id='logo' src='img/K9.png'></a>
+
+                <ul>
+                    <a href='contactenos.html'><li>Contactenos</li></a>
+                    <a href='login.html'><li>Login</li></a>
+                </ul>
+            </nav>
+        </header>
+        <section id='body'></section> <!-- Sin este Section no se acomoda bien D: -->
+    </div>
+    
+
+        <section id='body'>
+            <h1>CONTACTENOS</h1>
+            <div id="container2">
+                <form id="miFormulario">
+
+                    <label>*Nombre:</label><br />
+                    <input type="text" id="itNombre" class"campo" /><br />
+                    <div id="mensaje1" class="errores">Escriba su nombre</div><br />
+
+                    <label>*Correo:</label><br />
+                    <input type="text" id="itMail" class"campo" /><br />
+                    <div id="mensaje2" class="errores">Escriba un mail valido</div><br/>
+
+                    <label>*Asunto:</label><br />
+                    <input type="text" id="itAsunto" class"campo" /><br />
+                    <div id="mensaje3" class="errores">Escriba su asunto</div><br />
+
+                    <input type="submit" id="bEnviar" value="Enviar" class="boton"/>
+
+                </form>
+            </div>
+        </section>
+    
+
+
+</body>
+</html>

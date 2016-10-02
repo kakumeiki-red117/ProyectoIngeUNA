@@ -1,0 +1,26 @@
+<div class="modal fade" id="myModalFormularioLogin" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body" id="myModalMessage">
+                        <form role="form" onsubmit="return false;" id="formPersonas">
+                            <div class="form-group" id="groupLoginUsuario">
+                                <label for="usuario">Usuario</label>
+                                <input type="text" class="form-control" id="usuariolog" placeholder="Usuario" maxlength="30">
+                            </div>
+
+                            <div class="form-group" id="groupLoginContraseña">
+                                <label for="contraseña">Contraseña</label>
+                                <input type="text" class="form-control" id="contraseñalog" placeholder="Contraseña" maxlength="30">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" value="iniciarSesion" id="loginAction"/>
+                                <button type="submit" class="btn btn-primary" id="inicia">Iniciar</button>
+                                <button type="reset" class="btn btn-danger" id="cancelarLogin">Cancelar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
