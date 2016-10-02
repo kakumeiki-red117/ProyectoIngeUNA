@@ -77,3 +77,26 @@ $(document).ready(function(){
 
 	});
 });
+
+function generate_table(value) {
+  var body = document.getElementsByTagName("body")[0];
+  var tbl     = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+  for (var i = 0; i < value; i++) {
+    var row = document.createElement("tr");
+
+    for (var j = 0; j < value; j++) {
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode("cell in row "+i+", column "+j);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+    }
+
+
+    tblBody.appendChild(row);
+  }
+
+  tbl.appendChild(tblBody);
+  body.appendChild(tbl);
+  tbl.setAttribute("border", "2");
+}
