@@ -3,7 +3,7 @@ git add "nombre archivo"  -->
 git commit  -----> guarda archivos creados y modificados en branch
 
 Para unir master con branch que se usa o se modifico ------>
-git cheackut master
+git checkout master
 git merge "nombre de branch"
 
 Para unir master (u otro branch) con github
