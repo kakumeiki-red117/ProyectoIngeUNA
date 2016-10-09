@@ -5,11 +5,11 @@
 }
 
 body{
-	background-color: #0404B4;
+	/*background-color: #0404B4;*/
 }
 
 section#banner{
-	width: 100%;	
+	width: 100%;
 	background-attachment: contain;
 	background-position: center;
 }
@@ -21,6 +21,31 @@ header{
 	background-color: transparent;
 	-webkit-transition: background-color .5s;
 	-moz-transition: background-color .5s;
+}
+
+thead{
+
+
+	height: 25px;
+	color: white;
+	background-color: blue;
+
+}
+input{
+	height: 23px;
+	width: 100px;
+}
+
+p{
+	margin-top: 15px;
+	margin-left: 165px;
+}
+
+.trcito{
+	height: 25px;
+	color: white;
+	background-color: blue;
+
 }
 
 nav{
@@ -78,6 +103,8 @@ img#logo{
 	text-align: left;
 	font-family: arial;
 }
+
+
 
 #container{
 	-webkit-border-radius:10px;
