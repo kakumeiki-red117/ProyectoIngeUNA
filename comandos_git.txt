@@ -14,3 +14,25 @@ al terminar se le da esc, luego ":wq" + enter y termina de editarlo
 
 para subir a remote
 git push origin master
+
+*******************ELIMINAR************************
+
+1.A Si quieres eliminar un archivo:
+1
+	
+git rm miarchivo.php
+
+1.B. Si quieres eliminar una carpeta:
+1
+	
+git rm -r micarpeta
+
+2. Creamos el commit
+1
+	
+git commit -m "elimino archivos innecesarios"
+
+3. Subimos los cambios al repositorio
+1
+	
+git push
