@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+
+
+<div class="informesForm">
+    <center><P><h3>INFORME DE LA POLICIA MUNICIAPAL A LA AUTORIDAD JUDICIAL</h3><P><P><P><P><P>
+
+
+
+
+    <!--<div>
+
+        <header>
+
+            <nav>
+
+                <ul>
+
+                    <a href='informes.html'><li>Informes</li></a>
+
+                    <a href='servicios.html'><li>Servicios</li></a>
+
+                </ul>
+
+
+
+                <a href='index.html'><img id='logo' src='img/K9.png'></a>
+
+
+
+                <ul>
+
+                    <a href='contactenos.html'><li>Contactenos</li></a>
+
+                    <a href='login.html'><li>Login</li></a>
+
+                </ul>
+
+            </nav>
+
+        </header>
+
+        <section id='body'></section>
+
+    </div>-->
+
+
+
+    <div id="compdiv" style="display:inline-block; margin-top: 5px;  overflow:auto; font-size:10px; font-weight:700; width:1200px">
+
+
+
+                    <center>
+
+                      <table id ="HECHOSTable" class="GRID" width = "890px">
+
+                        
+
+                      </table>
+
+					  <center>
+
+                      <textarea rows="10" cols="124"  id="hechos">
+
+
+
+                      </textarea>
+
+                    </center>
+
+                    </center>
+
+                 
+
+                    <center>
+
+                      <table id ="DILIGENCIASTable" class="GRID" width = "890px">
+
+
+
+                      </table>
+
+                    </center>
+
+					<center>
+
+                      <textarea id = "diligencias" rows="20" cols="124"></textarea>
+
+                    </center>
+
+                   <center>
+
+                      <table id ="ManiOTable" class="GRID" width = "890px"></table>
+
+                    </center>
+
+					<center>
+
+                      <textarea id="ofendidos" rows="20" cols="124"></textarea>
+
+                    </center>
+
+                    <center>
+
+                      <table id ="ManiTTable" class="GRID" width = "890px">
+
+
+
+                      </table>
+
+                    </center>
+
+					<center>
+
+                      <textarea id= "testigos" rows="20" cols="124"></textarea>
+
+                    </center>
+
+					<P><P>
+
+					<center>
+
+                      <table id ="AspectosTable" class="GRID" width = "890px">
+
+
+
+                      </table>
+
+                    </center>
+
+	</div>
+
+  </center>
+    
+    </div>
+
+<script>
+
+        document.addEventListener("DOMContentLoaded", pageLoad);
+
+
+
+        function pageLoad(){
+
+            ubicacionTable = document.getElementById("ubicacionTable");
+
+            
+
+            row = document.createElement('tr');
+
+            generate_tableRow(HECHOSTable, "DESCRIPCION DE HECHOS");
+
+            
+
+
+
+            row = document.createElement('tr');
+
+			generate_tableRow(DILIGENCIASTable, "DILIGENCIAS POLICIALES");
+
+
+
+            row = document.createElement('tr');
+
+			generate_tableRow(ManiOTable, "MANIFESTACION DEL OFENDIDO");
+
+
+
+            row = document.createElement('tr');
+
+			generate_tableRow(ManiTTable, "MANIFESTACION DEL TESTIGOS");
+
+
+
+         
+
+            row = document.createElement('tr');
+
+			generate_tableRow(AspectosTable, "ASPECTOS ADMINISTRATIVOS");
+
+            
+
+			
+
+
+
+            
+
+            
+
+
+
+            row = document.createElement('tr');
+
+
+
+			textBox_Alerta = document.createElement('input');
+
+			
+
+            checkBox_FP = document.createElement('input');
+
+            checkBox_FP.setAttribute("type", "checkbox");
+
+			
+
+			checkBox_CM = document.createElement('input');
+
+            checkBox_CM.setAttribute("type", "checkbox");
+
+
+
+            
+
+            checkBox_CP = document.createElement('input');
+
+            checkBox_CP.setAttribute("type", "checkbox");
+
+
+
+            checkBox_DN = document.createElement('input');
+
+            checkBox_DN.setAttribute("type", "checkbox");
+
+			
+
+			textBox_Otro = document.createElement('input');
+
+			textBox_Otro.setAttribute("id","otro");
+
+			
+
+
+
+           
+
+
+
+           			
+
+            generate_tableCell(AspectosTable,row,"Quien dio la alerta?:",false,false);
+
+            generate_tableCell(AspectosTable,row,checkBox_FP,false,true);
+
+            generate_tableCell(AspectosTable,row,checkBox_CM,false,true);
+
+			generate_tableCell(AspectosTable,row,checkBox_CP,false,true);
+
+            generate_tableCell(AspectosTable,row,checkBox_DN,false,true);
+
+			generate_tableCell(AspectosTable,row,textBox_Otro,false,true);
+
+
+
+            textBox_Otro.style.width = "65px";
+
+			
+
+            
+
+			row.childNodes[1].appendChild(document.createTextNode("Fuerza pública"));
+
+            row.childNodes[2].appendChild(document.createTextNode("Central Municipal"));
+
+			row.childNodes[3].appendChild(document.createTextNode("Calidad Policial"));
+
+			row.childNodes[4].appendChild(document.createTextNode("Denuncia"));
+
+			row.childNodes[5].appendChild(document.createTextNode("Otro"));
+
+			            
+
+          
+
+
+
+           
+
+		   row = document.createElement('tr');
+
+
+
+			textBox_Asesor = document.createElement('input');
+
+			
+
+            checkBox_FP = document.createElement('input');
+
+            checkBox_FP.setAttribute("type", "checkbox");
+
+			
+
+			checkBox_CR = document.createElement('input');
+
+            checkBox_CR.setAttribute("type", "checkbox");
+
+
+
+            
+
+            checkBox_CP = document.createElement('input');
+
+            
+
+
+
+
+
+           
+
+
+
+           			
+
+            generate_tableCell(AspectosTable,row,"Asesor Legal(MSP):",false,false);
+
+            generate_tableCell(AspectosTable,row,checkBox_FP,false,true);
+
+            generate_tableCell(AspectosTable,row,checkBox_CR,false,true);
+
+			generate_tableCell(AspectosTable,row,"En caso de violencia Domestíca: Medidas  de  protección  Vigentes :   Si(  )   No(  ) Expediente N° ______________  Fecha Notificación ______________ Fecha en la que fue notificado personalmente el agresor ______________",false,false);
+
+        
+
+          
+
+			
+
+            
+
+			row.childNodes[1].appendChild(document.createTextNode("Fuerza pública"));
+
+            row.childNodes[2].appendChild(document.createTextNode("Cruz Roja"));
+
+			row.childNodes[3].colSpan = "3";
+
+			
+
+
+
+            row = document.createElement('tr');
+
+
+
+            textBox_OA = document.createElement('input');
+
+						
+
+			generate_tableCell(AspectosTable,row,"Oficiales Actuantes: ",false,false);
+
+		
+
+            row.childNodes[0].colSpan = "6";
+
+			
+
+			row = document.createElement('tr');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,"NOMBRE",true,false);
+
+            
+
+            generate_tableCell(AspectosTable,row,"Cedula",true,false);
+
+            generate_tableCell(AspectosTable,row,"Telefono",true,false);
+
+            generate_tableCell(AspectosTable,row,"Firma",true,false);
+
+            generate_tableCell(AspectosTable,row,"Unidad de Origen",true,false);
+
+            generate_tableCell(AspectosTable,row,"Hora de informe Policial",true,false);
+
+
+
+
+
+            row = document.createElement('tr');
+
+
+
+            textBox_Nombre = document.createElement('input');
+
+            textBox_Cedula = document.createElement('input');
+
+            textBox_Telefono= document.createElement('input');
+
+            textBox_Firma= document.createElement('input');
+
+            textBox_Unidad= document.createElement('input');
+
+            textBox_Hora= document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_Nombre,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Cedula,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Telefono,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Firma,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Unidad,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Hora,false,true);
+
+
+
+			row = document.createElement('tr');
+
+
+
+            textBox_Nombre2 = document.createElement('input');
+
+            textBox_Cedula2 = document.createElement('input');
+
+            textBox_Telefono2= document.createElement('input');
+
+            textBox_Firma2= document.createElement('input');
+
+            textBox_Unidad2= document.createElement('input');
+
+            textBox_Hora2= document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_Nombre2,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Cedula2,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Telefono2,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Firma2,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Unidad2,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Hora2,false,true);
+
+
+
+			row = document.createElement('tr');
+
+
+
+            textBox_Nombre3 = document.createElement('input');
+
+            textBox_Cedula3 = document.createElement('input');
+
+            textBox_Telefono3= document.createElement('input');
+
+            textBox_Firma3= document.createElement('input');
+
+            textBox_Unidad3= document.createElement('input');
+
+            textBox_Hora3= document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_Nombre3,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Cedula3,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Telefono3,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Firma3,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Unidad3,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Hora3,false,true);
+
+			
+
+			
+
+			
+
+			
+
+			row = document.createElement('tr');
+
+
+
+            textBox_OA = document.createElement('input');
+
+						
+
+			generate_tableCell(AspectosTable,row,"Oficiales que Asisten: ",false,false);
+
+		
+
+            row.childNodes[0].colSpan = "6";
+
+			
+
+			row = document.createElement('tr');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,"NOMBRE",true,false);
+
+            
+
+            generate_tableCell(AspectosTable,row,"Cedula",true,false);
+
+            generate_tableCell(AspectosTable,row,"Telefono",true,false);
+
+            generate_tableCell(AspectosTable,row,"Firma",true,false);
+
+            generate_tableCell(AspectosTable,row,"Unidad de Origen",true,false);
+
+            generate_tableCell(AspectosTable,row,"Hora de informe Policial",true,false);
+
+
+
+
+
+            row = document.createElement('tr');
+
+
+
+            textBox_Nombre4 = document.createElement('input');
+
+            textBox_Cedula4 = document.createElement('input');
+
+            textBox_Telefono4= document.createElement('input');
+
+            textBox_Firma4= document.createElement('input');
+
+            textBox_Unidad4= document.createElement('input');
+
+            textBox_Hora4= document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_Nombre4,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Cedula4,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Telefono4,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Firma4,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Unidad4,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Hora4,false,true);
+
+
+
+			row = document.createElement('tr');
+
+
+
+            textBox_Nombre5 = document.createElement('input');
+
+            textBox_Cedula5 = document.createElement('input');
+
+            textBox_Telefono5= document.createElement('input');
+
+            textBox_Firma5= document.createElement('input');
+
+            textBox_Unidad5= document.createElement('input');
+
+            textBox_Hora5= document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_Nombre5,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Cedula5,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Telefono5,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Firma5,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Unidad5,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Hora5,false,true);
+
+
+
+			row = document.createElement('tr');
+
+
+
+            textBox_Nombre6 = document.createElement('input');
+
+            textBox_Cedula6 = document.createElement('input');
+
+            textBox_Telefono6= document.createElement('input');
+
+            textBox_Firma6= document.createElement('input');
+
+            textBox_Unidad6= document.createElement('input');
+
+            textBox_Hora6= document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_Nombre6,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Cedula6,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Telefono6,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Firma6,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Unidad6,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_Hora6,false,true);
+
+
+
+			
+
+			row = document.createElement('tr');
+
+
+
+            textBox_OA = document.createElement('input');
+
+						
+
+			generate_tableCell(AspectosTable,row,"Documentos Adjuntos (Actas de Decomisos, Requisa, Inspeción Ocular, Guia de Ganado, Guia de Madera, Otros documentos): ",false,false);
+
+		
+
+            row.childNodes[0].colSpan = "6";
+
+			
+
+		    row = document.createElement('tr');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,"Tipo Documento",true,false);
+
+            
+
+            generate_tableCell(AspectosTable,row,"Numero Folio",true,false);
+
+			row.childNodes[0].colSpan = "4";
+
+			row.childNodes[1].colSpan = "6";
+
+
+
+			row = document.createElement('tr');
+
+			            
+
+
+
+            textBox_TipoD = document.createElement('input');
+
+            textBox_NumFolio = document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_TipoD,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_NumFolio,false,true);
+
+			
+
+			row.childNodes[0].colSpan = "4";
+
+			row.childNodes[1].colSpan = "6";
+
+			textBox_TipoD.style.width = "555px";
+
+			textBox_NumFolio.style.width = "311px";
+
+			
+
+			
+
+			row = document.createElement('tr');
+
+			            
+
+
+
+            textBox_TipoD2 = document.createElement('input');
+
+            textBox_NumFolio2 = document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_TipoD2,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_NumFolio2,false,true);
+
+			
+
+			row.childNodes[0].colSpan = "4";
+
+			row.childNodes[1].colSpan = "6";
+
+			textBox_TipoD2.style.width = "555px";
+
+			textBox_NumFolio2.style.width = "311px";
+
+			
+
+			row = document.createElement('tr');
+
+			            
+
+
+
+            textBox_TipoD3 = document.createElement('input');
+
+            textBox_NumFolio3 = document.createElement('input');
+
+
+
+            
+
+            generate_tableCell(AspectosTable,row,textBox_TipoD3,false,true);
+
+            generate_tableCell(AspectosTable,row,textBox_NumFolio3,false,true);
+
+			
+
+			row.childNodes[0].colSpan = "4";
+
+			row.childNodes[1].colSpan = "6";
+
+			textBox_TipoD3.style.width = "555px";
+
+			textBox_NumFolio3.style.width = "311px";
+
+        }
+
+
+
+        function ubicacionTable_toCell(obj,colIdx){
+
+            switch(colIdx){
+
+                case 0:
+
+                    content=document.createTextNode();
+
+                    return content;
+
+                case 1:
+
+                    content=document.createTextNode();
+
+                    return content;
+
+                case 2:
+
+                    content=document.createTextNode();
+
+                    return content;
+
+                };
+
+                return null;
+
+        }
+
+</script>

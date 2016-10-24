@@ -22,6 +22,15 @@ import sguc.model.Usuario;
 import sguc.model.Jsonable;
 import sguc.model.Modelo;
 import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import sguc.model.Acta;
+import sguc.model.Informe;
+import sguc.model.Ofendido;
+import sguc.model.Persona;
+import sguc.model.Sitio;
+import sguc.model.Testigo;
 
 
 /**
@@ -49,24 +58,40 @@ public class MuniServ extends HttpServlet {
             response.setContentType("text/xml");
             RuntimeTypeAdapterFactory<Jsonable> rta = RuntimeTypeAdapterFactory.of(Jsonable.class,"_class")
              .registerSubtype(Usuario.class,"Usuario")
-             .registerSubtype(Imputado.class,"Imputado");
+             .registerSubtype(Persona.class,"Persona")
+             .registerSubtype(Sitio.class,"Sitio")
+             .registerSubtype(Informe.class,"Informe")
+             .registerSubtype(Acta.class,"Acta")
+             .registerSubtype(Imputado.class,"Imputado")
+             .registerSubtype(Ofendido.class,"Ofendido")
+             .registerSubtype(Testigo.class,"Testigo");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String criteria;
             Usuario user;
+            Persona persona;
+            Imputado imputado;
+            Ofendido ofendido;
+            Testigo testigo;
+            Sitio sitio;
+            Informe informe;
+            Acta acta;
             String accion = request.getParameter("action");
             List<Imputado> imputados;
+            List<Ofendido> ofendidos;
+            List<Testigo> testigos;
             int res;
             Date date;
+
             switch (accion) {
                 
                 case "userLogin":
+                
                     json = request.getParameter("user");
                     user= gson.fromJson(json, Usuario.class);
                     user=Modelo.userLogin(user);
                     if (user.getTipo()!=0){
                         request.getSession().setAttribute("user", user);
-                        System.err.println("sdf");
                         switch(user.getTipo()){
                             case 1:
                                 //Admin/UsuarioTipo0
@@ -85,6 +110,103 @@ public class MuniServ extends HttpServlet {
                 case "userLogout":
                         request.getSession().removeAttribute("user");
                         request.getSession().invalidate();
+                    break;
+                    
+                case "getPersona":
+                    criteria = request.getParameter("cedula");
+                    persona=Modelo.getPersonaXCedula(criteria);
+                    json = gson.toJson(persona);
+                    out.write(json);
+                    break;
+                    
+                case "getInforme":
+                    criteria = request.getParameter("id");
+                    informe=Modelo.getInformeXId(criteria);
+                    json = gson.toJson(informe);
+                    out.write(json);
+                    break;
+                    
+                case "getSitio":
+                    criteria = request.getParameter("informe");
+                    sitio=Modelo.getSitioXInforme(criteria);
+                    json = gson.toJson(sitio);
+                    out.write(json);
+                    break;
+                    
+                case "getActa":
+                    criteria = request.getParameter("id");
+                    acta=Modelo.getActaXId(criteria);
+                    json = gson.toJson(acta);
+                    out.write(json);
+                    break;
+                    
+                case "getImputados":
+                    criteria = request.getParameter("informe");
+                    imputados=Modelo.getImputadosXInforme(criteria);
+                    json = gson.toJson(imputados);
+                    out.write(json);
+                    break;
+                    
+                case "getOfendidos":
+                    criteria = request.getParameter("informe");
+                    ofendidos=Modelo.getOfendidosXInforme(criteria);
+                    json = gson.toJson(ofendidos);
+                    out.write(json);
+                    break;
+                    
+                case "getTestigos":
+                    criteria = request.getParameter("informe");
+                    testigos=Modelo.getTestigosXInforme(criteria);
+                    json = gson.toJson(testigos);
+                    out.write(json);
+                    break;
+                    
+                case "insInforme":
+                    json = request.getParameter("informe");
+                    informe= gson.fromJson(json, Informe.class);
+                    res=Modelo.insInforme(informe);
+                    json = gson.toJson(res); 
+                    out.write(json);
+                    break;
+                    
+                case "insSitio":
+                    json = request.getParameter("sitio");
+                    sitio= gson.fromJson(json, Sitio.class);
+                    res=Modelo.insSitio(sitio);
+                    json = gson.toJson(res); 
+                    out.write(json);
+                    break;
+                
+                case "insActa":
+                    json = request.getParameter("acta");
+                    acta= gson.fromJson(json, Acta.class);
+                    res=Modelo.insActa(acta);
+                    json = gson.toJson(res); 
+                    out.write(json);
+                    break;
+                    
+                case "insImputado":
+                    json = request.getParameter("imputado");
+                    imputado= gson.fromJson(json, Imputado.class);
+                    res=Modelo.insImputado(imputado);
+                    json = gson.toJson(res); 
+                    out.write(json);
+                    break;
+                    
+                case "insOfendido":
+                    json = request.getParameter("ofendido");
+                    ofendido= gson.fromJson(json, Ofendido.class);
+                    res=Modelo.insOfendido(ofendido);
+                    json = gson.toJson(res); 
+                    out.write(json);
+                    break;
+                    
+                case "insTestigo":
+                    json = request.getParameter("testigo");
+                    testigo= gson.fromJson(json, Testigo.class);
+                    res=Modelo.insTestigo(testigo);
+                    json = gson.toJson(res); 
+                    out.write(json);
                     break;
                 
             }

@@ -9,11 +9,16 @@ angular.module('myApp', [
   'myApp.view4',
   'myApp.view5',
   'myApp.view6',
+  'myApp.Informes',
+  'myApp.ConsInf',
+  'myApp.ConsAct',
+  'myApp.CreInf',
+  'myApp.CreAct',
   'myApp.version'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/view3'});
 }]);
 

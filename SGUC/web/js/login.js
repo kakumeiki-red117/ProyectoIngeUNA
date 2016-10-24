@@ -16,7 +16,7 @@ function login(){
                     document.getElementById("ide").className += ' error';
                     break;
                 case 1:
-                    document.location = "/SGUC/LoginExitosoAdminU0.html";
+                    document.location = "#!/Informes";
                     break;
                 case 2:
                     document.location = "/SGUC/LoginExitosoU1.html";

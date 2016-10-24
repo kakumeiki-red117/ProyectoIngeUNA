@@ -29,7 +29,7 @@ public class OficialAc implements Serializable, Jsonable{
     
     Persona persona;
     */
-    String ingforme;
+    String informe;
     Time horaConfecc;
     //String unidad;
 
@@ -41,12 +41,12 @@ public class OficialAc implements Serializable, Jsonable{
         this.id = id;
     }
 
-    public String getIngforme() {
-        return ingforme;
+    public String getInforme() {
+        return informe;
     }
 
-    public void setIngforme(String ingforme) {
-        this.ingforme = ingforme;
+    public void setInforme(String ingforme) {
+        this.informe = ingforme;
     }
 
     public Time getHoraConfecc() {
