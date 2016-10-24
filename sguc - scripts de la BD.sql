@@ -168,7 +168,7 @@ create table ofendidos(
 	delito varchar(50),
 	direccion varchar(200),
 	telefono_casa varchar(10),
-	direccion_trabajo varchar(10),
+	telefono_trabajo varchar(10),
 	telefono_movil varchar(10),
 	oficio varchar(30),
 	email varchar(30),
@@ -184,7 +184,7 @@ create table testigos(
 	informe varchar(20),
 	direccion varchar(200),
 	lugar_trabajo varchar(50),
-	oficio varchar(30),
+	telefono varchar(10),
 	email varchar(30),
 	CONSTRAINT testigos_PK PRIMARY KEY (id,informe),
 	CONSTRAINT informe_te_FK FOREIGN KEY (informe)
@@ -195,13 +195,22 @@ create table testigos(
 
 create table actas(
 	id varchar(20),
-	informe varchar(20),
+	informe varchar(20) NOT NULL,
 	detalles varchar(500),
-	CONSTRAINT actas_PK PRIMARY KEY (id,informe),
+	CONSTRAINT actas_PK PRIMARY KEY (id),
 	CONSTRAINT informe_ac_FK FOREIGN KEY (informe)
-	REFERENCES informes (id),
-	CONSTRAINT id_ac_FK FOREIGN KEY (id)
-	REFERENCES personas (id)
+	REFERENCES informes (id)
+);
+
+create table acta_imput(
+	acta varchar(20),
+	imputado varchar(20),
+	informe varchar(20),
+	CONSTRAINT acta_imput_PK PRIMARY KEY (acta,imputado,informe),
+	CONSTRAINT acta_ai_FK FOREIGN KEY (acta)
+	REFERENCES actas (id),
+	CONSTRAINT imput_ai_FK FOREIGN KEY (imputado,informe)
+	REFERENCES imputados (id,informe)
 );
 
 insert into provincias values('San Jose');
@@ -399,8 +408,134 @@ insert into personas values(
 	'1/jun/1977'
 );
 
+insert into personas values(
+	'203451234',
+	'Pedro',
+	'Arguedas',
+	'Esquivel',
+	'M',
+	32,
+	'Costarricense',
+	'6/sep/1984'
+);
+
+insert into personas values(
+	'603456783',
+	'Elena',
+	'Fonseca',
+	'Artavia',
+	'F',
+	36,
+	'Costarricense',
+	'16/feb/1980'
+);
+
+insert into personas values(
+	'8345766',
+	'Pablo Emilio',
+	'Escobar',
+	'Gaviria',
+	'M',
+	66,
+	'Colombiano',
+	'1/dec/1949'
+);
 
 
+
+insert into informes values(
+	'1',
+	'descrip afasa',
+	'no se que va aqui',
+	'Denuncia',
+	'OIJ',
+	'23',
+	'Bomberos',
+	'232',
+	'1',
+	'123',
+	'11/oct/2016',
+	'tipodoc1',
+	'1422'
+);
+
+insert into sitios values(
+	'1',
+	to_date('11/oct/2016 11:34:22','DD:MON:YYYY HH24:MI:SS'),
+	'Heredia',
+	'Flores',
+	'San Joaquin',
+	'cinco esquinas',
+	'a la par de la pulperia',
+	'residencia'
+);
+
+insert into imputados values(
+	'401344356',
+	'1',
+	'por alla',
+	'54323456',
+	'La Mami',
+	1,
+	to_date('11:55:34','HH24:MI:SS'),
+	0,
+	'no sabe',
+	'fea',
+	'ninguna'
+);
+
+insert into imputados values(
+	'8345766',
+	'1',
+	'por alla',
+	'76523493',
+	'El Patron',
+	1,
+	to_date('23:55:34','HH24:MI:SS'),
+	1,
+	'no quiso',
+	'gordo y feo',
+	'camisa blanca, pantalon verde'
+);
+
+insert into ofendidos values(
+	'203451234',
+	'1',
+	'robo agravado',
+	'por aqui',
+	'22453233',
+	'25955432',
+	'87323233',
+	'panadero',
+	'pana_dero@hotmail.com'
+);
+
+insert into testigos values(
+	'603456783',
+	'1',
+	'por el palo de mango',
+	'ICE',
+	'88555324',
+	'hello_ele@hotmail.com'
+);
+
+insert into actas values(
+	'1',
+	'1',
+	'La vara es que el mae tenia la puya y se la quitamos'
+);
+
+insert into acta_imput values(
+	'1',
+	'8345766',
+	'1'
+);
+
+commit;
+
+--select im.id,im.informe, direccion, telefono, alias, aprehendido, hora_aprehension, entendidos, motivo_nofirma, rasgos, vestimenta from imputados im,(select imputado,informe from acta_imput where acta='1') i where im.id=i.imputado and im.informe=i.informe;
+--select * from imputados im where im.id=(select imputado from acta_imput where acta='1');
+--select to_char(fecha_notif,'HH24:MI:SS') from informes;
 --select nombre from distritos,(select nombre n from cantones where provincia='San Jose') cant where canton=n;
 
 
@@ -411,6 +546,7 @@ insert into personas values(
  
 connect sguc/k9sguc;
 
+DROP TABLE acta_imput cascade constraints PURGE;
 DROP TABLE actas cascade constraints PURGE;
 DROP TABLE testigos cascade constraints PURGE;
 DROP TABLE ofendidos cascade constraints PURGE;
