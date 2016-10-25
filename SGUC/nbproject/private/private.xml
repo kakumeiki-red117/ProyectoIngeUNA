@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/ConsAct/ConsAct.html</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/src/java/sguc/model/Sitio.java</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/src/java/sguc/controller/MuniServ.java</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/js/Sitio.js</file>
             <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/view3/view3.html</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/index.html</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/Informes/Informes.html</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/ConsInf/ConsInf.html</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/CreInf/CreInf.html</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/css/font-awesome.min.css</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/js/login.js</file>
             <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/CreAct/CreAct.html</file>
         </group>
     </open-files>

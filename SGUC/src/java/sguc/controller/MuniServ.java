@@ -147,6 +147,14 @@ public class MuniServ extends HttpServlet {
                     out.write(json);
                     break;
                     
+                case "getImputadoXInfCed":
+                    criteria = request.getParameter("informe");
+                    String crit = request.getParameter("cedula");
+                    imputado=Modelo.getImputadoXInformeCed(criteria,crit);
+                    json = gson.toJson(imputado);
+                    out.write(json);
+                    break;
+                    
                 case "getOfendidos":
                     criteria = request.getParameter("informe");
                     ofendidos=Modelo.getOfendidosXInforme(criteria);

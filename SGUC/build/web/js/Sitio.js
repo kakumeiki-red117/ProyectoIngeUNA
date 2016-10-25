@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-function Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,tipo_lugar) {
-    this.Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,tipo_lugar);
+function Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,lugar) {
+    this.Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,lugar);
   }
   
   Sitio.prototype={
@@ -17,8 +17,8 @@ function Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,tip
         distrito: "",
         barrio: "",
         direccion: "",
-        tipo_lugar: "",
-	Sitio: function(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,tipo_lugar){
+        lugar: "",
+	Sitio: function(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,lugar){
 		this.informe=informe;
 		this.fecha=fecha;
 		this.hora=hora;
@@ -27,7 +27,7 @@ function Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,tip
                 this.distrito=distrito;
                 this.barrio=barrio;
                 this.direccion=direccion;
-                this.tipo_lugar=tipo_lugar;
+                this.lugar=lugar;
 	},
 	toString:function(){
 	  return this.informe;
@@ -35,7 +35,7 @@ function Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,tip
   };
   
   Sitio.from= function(plain){
-    var sitio = new Sitio(plain.informe,plain.fecha,plain.hora,plain.provincia,plain.canton,plain.distrito,plain.barrio,plain.direccion,plain.tipo_lugar);
+    var sitio = new Sitio(plain.informe,plain.fecha,plain.hora,plain.provincia,plain.canton,plain.distrito,plain.barrio,plain.direccion,plain.lugar);
 	return sitio;
   };
   
@@ -50,6 +50,6 @@ function Sitio(informe,fecha,hora,provincia,canton,distrito,barrio,direccion,tip
         distrito: sitio.distrito,
         barrio: sitio.barrio,
         direccion: sitio.direccion,
-        tipo_lugar: sitio.tipo_lugar,
+        lugar: sitio.lugar,
     };	
   };

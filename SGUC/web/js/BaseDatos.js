@@ -37,6 +37,9 @@ function revive(k,v) {
     if (v instanceof Object && v._class === 'Persona') {
         return Persona.from(v);
     }
+    if (v instanceof Object && v._class === 'Imputado') {
+        return Imputado.from(v);
+    }
     return v;
 }
 
@@ -50,6 +53,9 @@ function replacer(k,v) {
     }
     if (v instanceof Persona) {
         return Persona.to(v);
+    }
+    if (v instanceof Imputado) {
+        return Imputado.to(v);
     }
     return v;
 }

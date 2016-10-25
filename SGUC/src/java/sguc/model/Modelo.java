@@ -163,6 +163,24 @@ public class Modelo {
         return imputs;
    }
     
+    public static Imputado getImputadoXInformeCed(String informe,String cedula) throws Exception{
+        try {
+            String sql="select * from "+
+                    "Imputados  i  "+
+                    "where i.informe = '%s' and i.id = '%s'";
+            sql=String.format(sql,informe, cedula);
+            ResultSet rs =  consultar.executeQuery(sql);
+            if (rs.next()) {
+                return toImputado(rs);
+            }
+            if (rs.next()) {
+                return new Imputado();
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+   }
+    
     public static List<Imputado> getImputadosXActa(String acta) throws Exception{
         List<Imputado> imputs = new ArrayList<>();
         try {

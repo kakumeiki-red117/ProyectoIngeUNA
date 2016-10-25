@@ -4,8 +4,11 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
 <div id="services" class="informesForm" style="padding-top: 200px; padding-bottom: 200px;">
-<center><h3>POLICIA MUNICIPAL DE HEREDIA</h3>
+    <form method="post">
+    <center><input id="inpInforme" placeholder="Informe" type="text" onkeypress="presionaEnter2(event);" required="required"/>
+<h3>POLICIA MUNICIPAL DE HEREDIA</h3>
 
             <h3>ACTA DE DECOMISO, SECUESTRO O HALLAZGO</h3>
 
@@ -50,7 +53,7 @@ and open the template in the editor.
 
                     <center>
 
-                      <textarea rows="10" cols="124">
+                      <textarea id="textDetalles" rows="10" cols="124" class="input">
 
 
 
@@ -59,10 +62,11 @@ and open the template in the editor.
                     </center>
 
     </div>
-            <button id="bEnviar" type="submit" class="btn" onclick="enviar();">Enviar  </button>
+            <button id="bEnviar" type="submit" class="btn" onclick="enviar();">Enviar</button>
                 </center>
-    
+      </form>
     </div>
+  
 
 <script>
 
@@ -107,16 +111,22 @@ and open the template in the editor.
 
 
             textBox_FechaSuceso = document.createElement('input');
+            textBox_FechaSuceso.required = "required";
 
             textBox_HoraSuceso = document.createElement('input');
+            textBox_HoraSuceso.required = "required";
 
             textBox_Provincia = document.createElement('input');
+            textBox_Provincia.required = "required";
 
             textBox_Canton = document.createElement('input');
+            textBox_Canton.required = "required";
 
             textBox_Distrito = document.createElement('input');
+            textBox_Distrito.required = "required";
 
             textBox_Barrio = document.createElement('input');
+            textBox_Barrio.required = "required";
 
 
 
@@ -524,26 +534,6 @@ and open the template in the editor.
 
             row.childNodes[2].colSpan = "5";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
 
@@ -594,20 +584,87 @@ and open the template in the editor.
             }
         }
         
+        function cargaSitio(){
+            if(document.getElementById("inpInforme").value != "" && document.getElementById("inpInforme").value!==null){
+                Proxy.getSitio(document.getElementById("inpInforme").value,
+                function(sitio){
+                    if(typeof sitio.informe !== "undefined"){
+                        textBox_FechaSuceso.value = sitio.fecha;
+                        textBox_HoraSuceso.value = sitio.hora;
+                        textBox_Provincia.value = sitio.provincia;
+                        textBox_Canton.value = sitio.canton;
+                        textBox_Distrito.value = sitio.distrito;
+                        textBox_Barrio.value = sitio.barrio;
+                        textBox_DireccionSuceso.value = sitio.direccion;
+                        textBox_TipoLugar.value = sitio.lugar;
+                    }
+                }
+                );
+            }
+        }
+        
+        function cargaImputado(){
+            if(textBox_Cedula.value != "" && textBox_Cedula.value!==null){
+                Proxy.getImputadoXInfCed(document.getElementById("inpInforme").value,textBox_Cedula.value,
+                function(imputado){
+                    if(typeof imputado.persona !== "undefined"){
+                        textBox_DireccionExacta.value = imputado.direccion;
+                        textBox_telefono.value = imputado.telefono;
+                        textBox_conocidoComo.value = imputado.alias;
+                        if(imputado.motivo_sinfirma === "no quiso"){
+                            checkBox_firma.checked = true;
+                        }else{
+                            checkBox_firma.checked = false;
+                        }
+                        if(imputado.motivo_sinfirma === "no sabe"){
+                            checkBox_NoSabeFirmar = true;
+                        }else{
+                            checkBox_NoSabeFirmar.checked = false;
+                        }
+                        //checkBox_firma = imputado.motivo_sinfirma;
+                        //checkBox_NoSabeFirmar = imputado
+                        textBox_vestimenta.value = imputado.vestimenta;
+                        
+                        
+                        Proxy.getPersona(textBox_Cedula.value,
+                        function(persona){
+                            if(typeof persona.cedula !== "undefined"){
+                                textBox_Nombre.value = persona.nombre +" "+ persona.apellido1 +" "+  persona.apellido2;
+                                textBox_Cedula.value = persona.cedula;
+                                textBox_Sexo.value = persona.sexo;
+                                textBox_Edad.value = persona.edad;
+                                textBox_Nacionalidad.value = persona.nacionalidad;
+                                textBox_FechaNacimiento.value = persona.nacimiento;
+                            }
+                        }
+                        );
+                        
+                    }
+                }
+                );
+                
+            }
+        }
+        
         
         function presionaEnter(e){
         if(e.keyCode === 13){
-            e.preventDefault(); // Ensure it is only this code that rusn
-            cargaPersona();
+            e.preventDefault(); 
+            cargaImputado();
+        }
+    }
+    
+    function presionaEnter2(e){
+        if(e.keyCode === 13){
+            e.preventDefault(); 
+            cargaSitio();
         }
     }
 
 
-        
-        
-        /*function enviar(){
-            
-            var sitio = new Sitio("1",
+        function enviar(){
+            if(validar()){
+            /*var sitio = new Sitio("1",
             textBox_FechaSuceso.value,
             textBox_HoraSuceso.value,
             textBox_Provincia.value,
@@ -619,8 +676,51 @@ and open the template in the editor.
             
             
             
-            alert(JSON.stringify(sitio,replacer));
-            
+            alert(JSON.stringify(sitio,replacer));*/
+            alert("Acta creada!");
+            document.location = "#!/Informes";
+        }
+    }
+    
+    function validar(){
+        if(textBox_FechaSuceso.value === "" ||
+                        textBox_HoraSuceso.value === "" ||
+                        textBox_Provincia.value === "" ||
+                        textBox_Canton.value === "" ||
+                        textBox_Distrito.value === "" ||
+                        textBox_Barrio.value === "" ||
+                        textBox_DireccionSuceso.value === "" ||
+                        textBox_TipoLugar.value === "" ||
+                        textBox_Nombre.value === "" ||
+                                textBox_Cedula.value  === "" ||
+                                textBox_Sexo.value  === "" ||
+                                textBox_Edad.value  === "" ||
+                                textBox_Nacionalidad.value  === "" ||
+                                textBox_FechaNacimiento.value  === "" ||
+                                trimfield(document.getElementById("textDetalles").value) == ''){
+            return false;
+        }
+        return true;
+    }
+    
+    /*function trimAll(sString)
+    {
+        while (sString.substring(0,1) === ' ')
+        {
+            sString = sString.substring(1, sString.length);
+        }
+        while (sString.substring(sString.length-1, sString.length) === ' ')
+        {
+            sString = sString.substring(0,sString.length-1);
+        }
+        alert(sString);
+        return sString;
     }*/
+    
+    function trimfield(str) 
+{ 
+    return str.replace(/^\s+|\s+$/g,''); 
+}
+    
 
 </script>

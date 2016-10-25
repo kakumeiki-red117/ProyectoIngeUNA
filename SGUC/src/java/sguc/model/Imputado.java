@@ -14,8 +14,8 @@ import java.sql.Time;
  */
 public class Imputado implements Serializable, Jsonable{
     
-    String Informe;
-    String Persona;
+    String informe;
+    String persona;
     /*
     String cedula;
     String nombre;
@@ -32,8 +32,8 @@ public class Imputado implements Serializable, Jsonable{
     */
     String direccion;
     String telefono;
-    String Alias;
-    boolean Aprehendido;
+    String alias;
+    boolean aprehendido;
     Time horaAprehension;
     boolean entendidos;
     String motivo_sinfirma;
@@ -41,19 +41,19 @@ public class Imputado implements Serializable, Jsonable{
     String vestimenta;
 
     public String getInforme() {
-        return Informe;
+        return informe;
     }
 
     public void setInforme(String Informe) {
-        this.Informe = Informe;
+        this.informe = Informe;
     }
 
     public String getPersona() {
-        return Persona;
+        return persona;
     }
 
     public void setPersona(String Persona) {
-        this.Persona = Persona;
+        this.persona = Persona;
     }
 
     public String getDireccion() {
@@ -73,19 +73,19 @@ public class Imputado implements Serializable, Jsonable{
     }
 
     public String getAlias() {
-        return Alias;
+        return alias;
     }
 
     public void setAlias(String Alias) {
-        this.Alias = Alias;
+        this.alias = Alias;
     }
 
     public boolean isAprehendido() {
-        return Aprehendido;
+        return aprehendido;
     }
 
     public void setAprehendido(boolean Aprehendido) {
-        this.Aprehendido = Aprehendido;
+        this.aprehendido = Aprehendido;
     }
 
     public Time getHoraAprehension() {
