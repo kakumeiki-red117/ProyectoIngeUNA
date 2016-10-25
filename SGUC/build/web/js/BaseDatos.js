@@ -31,6 +31,12 @@ function revive(k,v) {
     if (v instanceof Object && v._class === 'Usuario') {
         return Usuario.from(v);
     }
+    if (v instanceof Object && v._class === 'Sitio') {
+        return Sitio.from(v);
+    }
+    if (v instanceof Object && v._class === 'Persona') {
+        return Persona.from(v);
+    }
     return v;
 }
 
@@ -38,6 +44,12 @@ function replacer(k,v) {
     
     if (v instanceof Usuario) {
         return Usuario.to(v);
+    }
+    if (v instanceof Sitio) {
+        return Sitio.to(v);
+    }
+    if (v instanceof Persona) {
+        return Persona.to(v);
     }
     return v;
 }

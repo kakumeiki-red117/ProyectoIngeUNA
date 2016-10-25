@@ -15,7 +15,7 @@ import java.sql.Time;
  */
 public class Sitio implements Serializable, Jsonable{
     
-    String Informe;
+    String informe;
     Date fecha;
     Time hora;
     String provincia;
@@ -26,11 +26,11 @@ public class Sitio implements Serializable, Jsonable{
     String lugar;
 
     public String getInforme() {
-        return Informe;
+        return informe;
     }
 
     public void setInforme(String Informe) {
-        this.Informe = Informe;
+        this.informe = Informe;
     }
 
     public Date getFecha() {
