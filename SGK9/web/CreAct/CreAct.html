@@ -607,7 +607,7 @@ and open the template in the editor.
             if(textBox_Cedula.value != "" && textBox_Cedula.value!==null){
                 Proxy.getImputadoXInfCed(document.getElementById("inpInforme").value,textBox_Cedula.value,
                 function(imputado){
-                    if(typeof imputado.persona !== "undefined"){
+                    if(typeof imputado.cedula !== "undefined"){
                         textBox_DireccionExacta.value = imputado.direccion;
                         textBox_telefono.value = imputado.telefono;
                         textBox_conocidoComo.value = imputado.alias;
@@ -621,23 +621,16 @@ and open the template in the editor.
                         }else{
                             checkBox_NoSabeFirmar.checked = false;
                         }
-                        //checkBox_firma = imputado.motivo_sinfirma;
-                        //checkBox_NoSabeFirmar = imputado
+                        
                         textBox_vestimenta.value = imputado.vestimenta;
                         
+                        textBox_Nombre.value = imputado.nombre +" "+ imputado.apellido1 +" "+  imputado.apellido2;
+                        textBox_Cedula.value = imputado.cedula;
+                        textBox_Sexo.value = imputado.sexo;
+                        textBox_Edad.value = imputado.edad;
+                        textBox_Nacionalidad.value = imputado.nacionalidad;
+                        textBox_FechaNacimiento.value = imputado.nacimiento;
                         
-                        Proxy.getPersona(textBox_Cedula.value,
-                        function(persona){
-                            if(typeof persona.cedula !== "undefined"){
-                                textBox_Nombre.value = persona.nombre +" "+ persona.apellido1 +" "+  persona.apellido2;
-                                textBox_Cedula.value = persona.cedula;
-                                textBox_Sexo.value = persona.sexo;
-                                textBox_Edad.value = persona.edad;
-                                textBox_Nacionalidad.value = persona.nacionalidad;
-                                textBox_FechaNacimiento.value = persona.nacimiento;
-                            }
-                        }
-                        );
                         
                     }
                 }
@@ -684,7 +677,18 @@ and open the template in the editor.
     }
     
     function guardaActa(){
-        acta = new Acta("1",document.getElementById("inpInforme").value,document.getElementById("textDetalles").value);
+        var imputs=[];//Arreglo de imputados del acta
+        
+        //Para cada imputado agregado en el formulario del acta. Para cuando sean mas de uno se utiliza un for
+        var imput = new Imputado();
+        imput.cedula=textBox_Cedula.value;
+        imputs.push(imput);
+        //
+        /*imput=new Imputado();
+        imput.cedula=textBox_Cedula2.value;
+        imputs.push(imput);*/
+        
+        acta = new Acta("1",document.getElementById("inpInforme").value,new Sitio(),imputs,document.getElementById("textDetalles").value,new Testigo(),new Imputado(),new OficialAc());
         Proxy.insActa(acta,textBox_Cedula.value,function(resp){
             switch(resp){
                 case 0:

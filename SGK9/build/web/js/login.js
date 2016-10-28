@@ -8,6 +8,7 @@ function pageLoad(){
 }
         
 function login(){
+    
     var usuario = new Usuario(document.getElementById("ide").value,document.getElementById("passw").value,0);
     Proxy.userLogin(usuario,
         function(usuario){

@@ -12,9 +12,9 @@ import java.sql.Time;
  *
  * @author Leo
  */
-public class OficialAc implements Serializable, Jsonable{
+public class OficialAc extends Oficial implements Serializable, Jsonable{
     
-    String id;
+    //String id;
     /*
     String cedula;
     String nombre;
@@ -33,13 +33,13 @@ public class OficialAc implements Serializable, Jsonable{
     Time horaConfecc;
     //String unidad;
 
-    public String getId() {
+    /*public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
+    }*/
 
     public String getInforme() {
         return informe;

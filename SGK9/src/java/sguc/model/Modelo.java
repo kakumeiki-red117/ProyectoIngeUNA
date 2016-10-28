@@ -151,7 +151,7 @@ public class Modelo {
         List<Imputado> imputs = new ArrayList<>();
         try {
             String sql="select * from "+
-                    "Imputados  i  "+
+                    "v_Imputados  i  "+
                     "where i.informe = '%s'";
             sql=String.format(sql,informe);
             ResultSet rs =  consultar.executeQuery(sql);
@@ -166,7 +166,7 @@ public class Modelo {
     public static Imputado getImputadoXInformeCed(String informe,String cedula) throws Exception{
         try {
             String sql="select * from "+
-                    "Imputados  i  "+
+                    "v_Imputados  i  "+
                     "where i.informe = '%s' and i.id = '%s'";
             sql=String.format(sql,informe, cedula);
             ResultSet rs =  consultar.executeQuery(sql);
@@ -184,9 +184,9 @@ public class Modelo {
     public static List<Imputado> getImputadosXActa(String acta) throws Exception{
         List<Imputado> imputs = new ArrayList<>();
         try {
-            String sql="select im.id,im.informe, direccion, telefono, alias, aprehendido, hora_aprehension, entendidos, motivo_nofirma, rasgos, vestimenta from "+
-                    "Imputados im,(select imputado,informe from acta_imput where acta='%s') i "+
-                    "where im.id=i.imputado and im.informe=i.informe";
+            String sql="select * from "+
+                    "v_Imputados i "+
+                    "where i.acta = '%s'";
             sql=String.format(sql,acta);
             ResultSet rs =  consultar.executeQuery(sql);
             while (rs.next()) {
@@ -201,7 +201,7 @@ public class Modelo {
         List<Ofendido> ofend = new ArrayList<>();
         try {
             String sql="select * from "+
-                    "Ofendidos  o  "+
+                    "v_Ofendidos  o  "+
                     "where o.informe = '%s'";
             sql=String.format(sql,informe);
             ResultSet rs =  consultar.executeQuery(sql);
@@ -295,21 +295,21 @@ public class Modelo {
         ResultSet rs =  consultar.executeUpdateWithKeys(sql);
 
         if (rs!=null) {
-            
-            String sql1="insert into acta_imput "+
-                "(acta,imputado, informe) "+
-                "values ('%s','%s','%s')";
-        
-        sql1=String.format(sql1,acta.getActa(),
-                imputado,
-                acta.getInforme()
-                );
-        ResultSet rs1 =  consultar.executeUpdateWithKeys(sql1);
-            if (rs1!=null) {
-                return 0;
-            }else{
-            return 1;
+            for(int i=0; i<acta.imputados.size();i++){
+                String sql1="update Imputados i "+
+                    "set acta = '%s' "+
+                    "where i.id = '%s' and i.informe = '%s'";
+
+                sql1=String.format(sql1,acta.getActa(),
+                        acta.imputados.get(i).cedula,
+                        acta.getInforme()
+                        );
+                ResultSet rs1 =  consultar.executeUpdateWithKeys(sql1);
+                if (rs1==null) {
+                    return 1;
+                }
             }
+            return 0;
         }
         else{
             return 1;
@@ -318,11 +318,12 @@ public class Modelo {
     
     public static int insImputado(Imputado imputado) throws Exception{
         String sql="insert into Imputados "+
-                "(id,informe, direccion, telefono, alias, aprehendido, hora_aprehension, entendidos, motivo_nofirma, rasgos, vestimenta) "+
-                "values ('%s','%s','%s','%s','%s','%s',to_date('%s','HH24:MI:SS'),'%s','%s','%s','%s')";
+                "(id,informe,acta, direccion, telefono, alias, aprehendido, hora_aprehension, entendidos, motivo_nofirma, rasgos, vestimenta) "+
+                "values ('%s','%s','%s','%s','%s','%s','%s',to_date('%s','HH24:MI:SS'),'%s','%s','%s','%s')";
         
-        sql=String.format(sql,imputado.getPersona(),
+        sql=String.format(sql,imputado.getCedula(),
                 imputado.getInforme(),
+                imputado.getActa(),
                 imputado.getDireccion(),
                 imputado.getTelefono(),
                 imputado.getAlias(),
@@ -348,7 +349,7 @@ public class Modelo {
                 "(id,informe,delito,direccion,telefono_casa,telefono_trabajo,telefono_movil,oficio,email) "+
                 "values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
         
-        sql=String.format(sql,ofendido.getPersona(),
+        sql=String.format(sql,ofendido.getCedula(),
                 ofendido.getInforme(),
                 ofendido.getDelito(),
                 ofendido.getDireccion(),
@@ -373,7 +374,7 @@ public class Modelo {
                 "(id,informe,direccion,lugar_trabajo,telefono,email) "+
                 "values ('%s','%s','%s','%s','%s','%s')";
         
-        sql=String.format(sql,testigo.getPersona(),
+        sql=String.format(sql,testigo.getCedula(),
                 testigo.getInforme(),
                 testigo.getDireccion(),
                 testigo.getLugTrabajo(),
@@ -390,7 +391,7 @@ public class Modelo {
         }
     }
     
-    public static int insActImp(String acta, String imputado, String informe) throws Exception{
+    /*public static int insActImp(String acta, String imputado, String informe) throws Exception{
         String sql="insert into acta_imput "+
                 "(acta,imputado,informe) "+
                 "values ('%s','%s','%s')";
@@ -407,14 +408,14 @@ public class Modelo {
         else{
             return 1;
         }
-    }
+    }*/
     
     public static int insOficialAs(OficialAs oficial) throws Exception{
         String sql="insert into oficiales_as "+
                 "(id,informe) "+
                 "values ('%s','%s')";
         
-        sql=String.format(sql,oficial.getId(),
+        sql=String.format(sql,oficial.getCedula(),
                 oficial.getInforme()
                 );
         ResultSet rs =  consultar.executeUpdateWithKeys(sql);
@@ -432,7 +433,7 @@ public class Modelo {
                 "(id,informe,hora_confec) "+
                 "values ('%s','%s',to_date('%s','HH24:MI:SS'))";
         
-        sql=String.format(sql,oficial.getId(),
+        sql=String.format(sql,oficial.getCedula(),
                 oficial.getInforme(),
                 new SimpleDateFormat(TIME_FORMAT_NOW).format(oficial.getHoraConfecc())
                 );
@@ -516,8 +517,16 @@ public class Modelo {
    
     private static Imputado toImputado(ResultSet rs) throws Exception{
         Imputado obj= new Imputado();
+        obj.setCedula(rs.getString("id"));
+        obj.setNombre(rs.getString("nombre"));
+        obj.setApellido1(rs.getString("apellido1"));
+        obj.setApellido2(rs.getString("apellido2"));
+        obj.setSexo(rs.getString("sexo").charAt(0));
+        obj.setEdad(rs.getInt("edad"));
+        obj.setNacionalidad(rs.getString("nacionalidad"));
+        obj.setNacimiento(rs.getDate("nacimiento"));
         obj.setInforme(rs.getString("informe"));
-        obj.setPersona(rs.getString("id"));
+        obj.setActa(rs.getString("acta"));
         obj.setDireccion(rs.getString("direccion"));
         obj.setTelefono(rs.getString("telefono"));
         obj.setAlias(rs.getString("alias"));
@@ -532,8 +541,15 @@ public class Modelo {
     
     private static Ofendido toOfendido(ResultSet rs) throws Exception{
         Ofendido obj= new Ofendido();
+        obj.setCedula(rs.getString("id"));
+        obj.setNombre(rs.getString("nombre"));
+        obj.setApellido1(rs.getString("apellido1"));
+        obj.setApellido2(rs.getString("apellido2"));
+        obj.setSexo(rs.getString("sexo").charAt(0));
+        obj.setEdad(rs.getInt("edad"));
+        obj.setNacionalidad(rs.getString("nacionalidad"));
+        obj.setNacimiento(rs.getDate("nacimiento"));
         obj.setInforme(rs.getString("informe"));
-        obj.setPersona(rs.getString("id"));
         obj.setDireccion(rs.getString("direccion"));
         obj.setTelefonoCasa(rs.getString("telefono_casa"));
         obj.setTelefonoTrabajo(rs.getString("telefono_trabajo"));
@@ -546,8 +562,16 @@ public class Modelo {
     
     private static Testigo toTestigo(ResultSet rs) throws Exception{
         Testigo obj= new Testigo();
+        obj.setCedula(rs.getString("id"));
+        obj.setNombre(rs.getString("nombre"));
+        obj.setApellido1(rs.getString("apellido1"));
+        obj.setApellido2(rs.getString("apellido2"));
+        obj.setSexo(rs.getString("sexo").charAt(0));
+        obj.setEdad(rs.getInt("edad"));
+        obj.setNacionalidad(rs.getString("nacionalidad"));
+        obj.setNacimiento(rs.getDate("nacimiento"));
         obj.setInforme(rs.getString("informe"));
-        obj.setPersona(rs.getString("id"));
+        //obj.setPersona(rs.getString("id"));
         obj.setDireccion(rs.getString("direccion"));
         obj.setLugTrabajo(rs.getString("lugar_trabajo"));
         obj.setTelefono(rs.getString("telefono"));

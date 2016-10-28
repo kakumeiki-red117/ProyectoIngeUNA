@@ -3,16 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/src/java/sguc/model/Modelo.java</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/src/java/sguc/controller/MuniServ.java</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/js/Sitio.js</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/src/java/sguc/model/Acta.java</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/view3/view3.html</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/js/Proxy.js</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/js/Acta.js</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/js/login.js</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/js/BaseDatos.js</file>
-            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGUC/web/CreAct/CreAct.html</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/src/java/sguc/controller/MuniServ.java</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/web/index.html</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/web/js/login.js</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/src/java/sguc/model/Objet.java</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/src/java/sguc/model/Imputado.java</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/web/js/Proxy.js</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/web/js/BaseDatos.js</file>
+            <file>file:/C:/Users/Leo/Documents/GitHub/ProyectoIngeUNA/SGK9/web/js/Objet.js</file>
         </group>
     </open-files>
 </project-private>

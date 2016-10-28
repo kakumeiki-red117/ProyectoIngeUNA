@@ -11,10 +11,10 @@ import java.io.Serializable;
  *
  * @author Leo
  */
-public class Ofendido implements Serializable, Jsonable{
+public class Ofendido extends Persona implements Serializable, Jsonable{
     
     String Informe;
-    String Persona;
+    //String Persona;
     /*
     String cedula;
     String nombre;
@@ -45,13 +45,13 @@ public class Ofendido implements Serializable, Jsonable{
         this.Informe = Informe;
     }
 
-    public String getPersona() {
+    /*public String getPersona() {
         return Persona;
     }
 
     public void setPersona(String Persona) {
         this.Persona = Persona;
-    }
+    }*/
 
     public String getDireccion() {
         return direccion;

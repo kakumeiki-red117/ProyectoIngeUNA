@@ -1,5 +1,6 @@
 var Proxy = Proxy || {};
 
+
 Proxy.userLogin = function(user,callBack){
     var jsonText = JSON.stringify(user,replacer);
     var AJAX_req = new XMLHttpRequest();
@@ -103,6 +104,7 @@ Proxy.insActa = function(acta,imput,callBack){
             callBack(object);
         }
     };
+    alert(jsonText);
     AJAX_req.send("acta="+jsonText+"&imputado="+imput);
 };
 

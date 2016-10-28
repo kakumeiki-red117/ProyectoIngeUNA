@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import sguc.model.Acta;
 import sguc.model.Informe;
 import sguc.model.Ofendido;
+import sguc.model.OficialAc;
 import sguc.model.Persona;
 import sguc.model.Sitio;
 import sguc.model.Testigo;
@@ -64,7 +65,8 @@ public class MuniServ extends HttpServlet {
              .registerSubtype(Acta.class,"Acta")
              .registerSubtype(Imputado.class,"Imputado")
              .registerSubtype(Ofendido.class,"Ofendido")
-             .registerSubtype(Testigo.class,"Testigo");
+             .registerSubtype(Testigo.class,"Testigo")
+             .registerSubtype(OficialAc.class,"OficialAc");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String criteria;

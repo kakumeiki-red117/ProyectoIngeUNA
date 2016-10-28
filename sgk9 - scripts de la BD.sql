@@ -108,6 +108,15 @@ create table informes(
 	REFERENCES organismos (nombre)
 );
 
+create table actas(
+	id varchar(20),
+	informe varchar(20) NOT NULL,
+	detalles varchar(500),
+	CONSTRAINT actas_PK PRIMARY KEY (id),
+	CONSTRAINT informe_ac_FK FOREIGN KEY (informe)
+	REFERENCES informes (id)
+);
+
 create table sitios(
 	informe varchar(20),
 	fecha_hora date,
@@ -146,6 +155,7 @@ create table oficiales_as(
 create table imputados(
 	id varchar(20),
 	informe varchar(20),
+	acta varchar(20),
 	direccion varchar(200),
 	telefono varchar(10),
 	alias varchar(30),
@@ -158,6 +168,8 @@ create table imputados(
 	CONSTRAINT imputados_PK PRIMARY KEY (id,informe),
 	CONSTRAINT informe_im_FK FOREIGN KEY (informe)
 	REFERENCES informes (id),
+	CONSTRAINT acta_im_FK FOREIGN KEY (acta)
+	REFERENCES actas (id),
 	CONSTRAINT id_im_FK FOREIGN KEY (id)
 	REFERENCES personas (id)
 );
@@ -193,25 +205,22 @@ create table testigos(
 	REFERENCES personas (id)
 );
 
-create table actas(
-	id varchar(20),
-	informe varchar(20) NOT NULL,
-	detalles varchar(500),
-	CONSTRAINT actas_PK PRIMARY KEY (id),
-	CONSTRAINT informe_ac_FK FOREIGN KEY (informe)
-	REFERENCES informes (id)
-);
+--create table acta_imput(
+--	acta varchar(20),
+--	imputado varchar(20),
+--	informe varchar(20),
+--	CONSTRAINT acta_imput_PK PRIMARY KEY (acta,imputado,informe),
+--	CONSTRAINT acta_ai_FK FOREIGN KEY (acta)
+--	REFERENCES actas (id),
+--	CONSTRAINT imput_ai_FK FOREIGN KEY (imputado,informe)
+--	REFERENCES imputados (id,informe)
+--);
 
-create table acta_imput(
-	acta varchar(20),
-	imputado varchar(20),
-	informe varchar(20),
-	CONSTRAINT acta_imput_PK PRIMARY KEY (acta,imputado,informe),
-	CONSTRAINT acta_ai_FK FOREIGN KEY (acta)
-	REFERENCES actas (id),
-	CONSTRAINT imput_ai_FK FOREIGN KEY (imputado,informe)
-	REFERENCES imputados (id,informe)
-);
+CREATE VIEW V_IMPUTADOS AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,I.INFORME,I.ACTA,I.DIRECCION,I.TELEFONO,I.ALIAS,I.APREHENDIDO,I.HORA_APREHENSION,I.ENTENDIDOS,I.MOTIVO_NOFIRMA,I.RASGOS,I.VESTIMENTA FROM PERSONAS P, IMPUTADOS I WHERE P.ID = I.ID WITH READ ONLY;
+CREATE VIEW V_OFENDIDOS AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,O.INFORME,O.DELITO,O.TELEFONO_CASA,O.TELEFONO_TRABAJO,O.TELEFONO_MOVIL,O.OFICIO,O.EMAIL FROM PERSONAS P, OFENDIDOS O WHERE P.ID = O.ID WITH READ ONLY;
+CREATE VIEW V_TESTIGOS AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,T.INFORME,T.DIRECCION,T.LUGAR_TRABAJO,T.TELEFONO,T.EMAIL FROM PERSONAS P, TESTIGOS T WHERE P.ID = T.ID WITH READ ONLY;
+
+
 
 insert into provincias values('San Jose');
 insert into provincias values('Alajuela');
@@ -473,6 +482,7 @@ insert into sitios values(
 insert into imputados values(
 	'401344356',
 	'1',
+	'',
 	'por alla',
 	'54323456',
 	'La Mami',
@@ -487,6 +497,7 @@ insert into imputados values(
 insert into imputados values(
 	'8345766',
 	'1',
+	'',
 	'por alla',
 	'76523493',
 	'El Patron',
@@ -525,13 +536,16 @@ insert into actas values(
 	'La vara es que el mae tenia la puya y se la quitamos'
 );
 
-insert into acta_imput values(
-	'1',
-	'8345766',
-	'1'
-);
+--insert into acta_imput values(
+--	'1',
+--	'8345766',
+--	'1'
+--);
 
 commit;
+
+--views
+--CREATE VIEW V_IMPUTADOS AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,I.INFORME,I.DIRECCION,I.TELEFONO,I.ALIAS,I.APREHENDIDO,I.HORA_APREHENSION,I.ENTENDIDOS,I.MOTIVO_NOFIRMA,I.RASGOS,I.VESTIMENTA FROM PERSONAS P, IMPUTADOS I WHERE P.ID = I.ID;
 
 --select im.id,im.informe, direccion, telefono, alias, aprehendido, hora_aprehension, entendidos, motivo_nofirma, rasgos, vestimenta from imputados im,(select imputado,informe from acta_imput where acta='1') i where im.id=i.imputado and im.informe=i.informe;
 --select * from imputados im where im.id=(select imputado from acta_imput where acta='1');

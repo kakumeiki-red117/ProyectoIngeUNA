@@ -11,9 +11,9 @@ import java.io.Serializable;
  *
  * @author Leo
  */
-public class OficialAs implements Serializable, Jsonable{
+public class OficialAs extends Oficial implements Serializable, Jsonable{
     
-    String id;
+    //String id;
     /*
     String cedula;
     String nombre;
@@ -31,13 +31,13 @@ public class OficialAs implements Serializable, Jsonable{
     String informe;
     String movil;
 
-    public String getId() {
+    /*public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
+    }*/
 
     public String getInforme() {
         return informe;

@@ -12,10 +12,10 @@ import java.sql.Time;
  *
  * @author Leo
  */
-public class Imputado implements Serializable, Jsonable{
+public class Imputado extends Persona implements Serializable, Jsonable{
     
     String informe;
-    String persona;
+    String acta;
     /*
     String cedula;
     String nombre;
@@ -48,12 +48,12 @@ public class Imputado implements Serializable, Jsonable{
         this.informe = Informe;
     }
 
-    public String getPersona() {
-        return persona;
+    public String getActa() {
+        return acta;
     }
 
-    public void setPersona(String Persona) {
-        this.persona = Persona;
+    public void setActa(String Persona) {
+        this.acta = Persona;
     }
 
     public String getDireccion() {

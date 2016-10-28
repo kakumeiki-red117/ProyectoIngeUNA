@@ -43,6 +43,12 @@ function revive(k,v) {
     if (v instanceof Object && v._class === 'Acta') {
         return Acta.from(v);
     }
+    if (v instanceof Object && v._class === 'Testigo') {
+        return Testigo.from(v);
+    }
+    if (v instanceof Object && v._class === 'OficialAc') {
+        return OficialAc.from(v);
+    }
     return v;
 }
 
@@ -62,6 +68,12 @@ function replacer(k,v) {
     }
     if (v instanceof Acta) {
         return Acta.to(v);
+    }
+    if (v instanceof Testigo) {
+        return Testigo.to(v);
+    }
+    if (v instanceof OficialAc) {
+        return OficialAc.to(v);
     }
     return v;
 }

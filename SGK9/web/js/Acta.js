@@ -4,18 +4,28 @@
  * and open the template in the editor.
  */
 
-function Acta(nacta,informe,detalles) {
-    this.Acta(nacta,informe,detalles);
+function Acta(nacta,informe,ubicacion,imputados,detalles,testigoact,imputadofirma,oficialdecomiso) {
+    this.Acta(nacta,informe,ubicacion,imputados,detalles,testigoact,imputadofirma,oficialdecomiso);
   }
   
   Acta.prototype={
   	nacta: "",
 	informe: "",
+        ubicacion: new Sitio(),
+        imputados:[],
 	detalles: "",
-	Acta: function(nacta,informe,detalles){
+        testigoact: new Testigo(),
+        imputadofirma: new Imputado(),
+        oficialdecomiso: new OficialAc(),
+	Acta: function(nacta,informe,ubicacion,imputados,detalles,testigoact,imputadofirma,oficialdecomiso){
 		this.nacta=nacta;
 		this.informe=informe;
+                this.ubicacion=ubicacion;
+                this.imputados=imputados;
 		this.detalles=detalles;
+                this.testigoact=testigoact;
+                this.imputadofirma=imputadofirma;
+		this.oficialdecomiso=oficialdecomiso;
 	},
 	toString:function(){
 	  return this.nacta;
@@ -23,15 +33,20 @@ function Acta(nacta,informe,detalles) {
   };
   
   Acta.from= function(plain){
-    var nacta = new Acta(plain.nacta,plain.informe,plain.detalles);
-	return nacta;
+    var acta = new Acta(plain.nacta,plain.informe,plain.ubicacion,plain.imputados,plain.detalles,plain.testigoact,plain.imputadofirma,plain.oficialdecomiso);
+	return acta;
   };
   
-    Acta.to= function(nacta){
+    Acta.to= function(acta){
     return {
         _class : 'Acta',
-        nacta : nacta.nacta,
-        informe : nacta.informe,
-	detalles : nacta.detalles,
+        nacta : acta.nacta,
+        informe : acta.informe,
+        ubicacion : acta.ubicacion,
+        imputados : acta.imputados,
+	detalles : acta.detalles,
+        testigoact : acta.testigoact,
+        imputadofirma : acta.imputadofirma,
+	oficialdecomiso : acta.oficialdecomiso
     };	
   };
