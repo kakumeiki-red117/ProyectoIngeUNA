@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>SGUC</title>
+
+    <link rel="stylesheet" href="style/style.css">
+    <script src='js/js.js'></script>
+    <center><h3>INFORME DE LA POLIÍCIA MUNICIPAL A LA AUTORIDAD JUDICIAL</h3>
+
+
+    </center>
+</head>
+
+
+
+<body>
+  
+    <div id="compdiv" style="display:inline-block; margin-top: 5px;  overflow:auto; font-size:10px; font-weight:700; width:1200px">
+
+
+                    <p>El suscrito oficial de la policia Municipal hace del conocimiento de la Autoridad Judicial lo siguiente</p>
+                    <center>
+                      <table id ="ubicacionTable" class="GRID">
+
+                      </table>
+                    </center>
+					<p>Imputados</p>
+                    <center>
+                      <table id ="imputadoTable" class="GRID">
+
+                      </table>
+                    </center>
+					<p>Ofendidos</p>
+					<center>
+                      <table id ="ofendidoTable" class="GRID">
+
+                      </table>
+                    </center>
+					<p>Testigos</p>
+					<center>
+                      <table id ="testigoTable" class="GRID">
+
+                      </table>
+                    </center>
+                    
+    </div>
+  </center>
+
+
+</body>
+<script>
+        document.addEventListener("DOMContentLoaded", pageLoad);
+
+        function pageLoad(){
+            ubicacionTable = document.getElementById("ubicacionTable");
+            //ubicacionTable.toCell=ubicacionTable_toCell;
+
+            row = document.createElement('tr');
+            //textBox.style.width = "400px";
+            //textBox.style.height = "23px";
+            generate_tableRow(ubicacionTable, "UBICACION");
+
+            generate_tableCell(ubicacionTable,row,"Fecha del suceso",false,false);
+            generate_tableCell(ubicacionTable,row,"Hora del suceso",false,false);
+            generate_tableCell(ubicacionTable,row,"Provincia",false,false);
+            generate_tableCell(ubicacionTable,row,"Canton",false,false);
+            generate_tableCell(ubicacionTable,row,"Distrito",false,false);
+            generate_tableCell(ubicacionTable,row,"Barrio y/o Avenida - Calle",false,false);
+
+            row = document.createElement('tr');
+
+            textBox_FechaSuceso = document.createElement('input');
+            textBox_HoraSuceso = document.createElement('input');
+            textBox_Provincia = document.createElement('input');
+            textBox_Canton = document.createElement('input');
+            textBox_Distrito = document.createElement('input');
+            textBox_Barrio = document.createElement('input');
+
+            generate_tableCell(ubicacionTable,row,textBox_FechaSuceso,false,true);
+            generate_tableCell(ubicacionTable,row,textBox_HoraSuceso,false,true);
+            generate_tableCell(ubicacionTable,row,textBox_Provincia,false,true);
+            generate_tableCell(ubicacionTable,row,textBox_Canton,false,true);
+            generate_tableCell(ubicacionTable,row,textBox_Distrito,false,true);
+            generate_tableCell(ubicacionTable,row,textBox_Barrio,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionSuceso = document.createElement('input');
+            textBox_DireccionSuceso.style.width = "600px";
+            textBox_DireccionSuceso.style.height = "23px";
+
+            generate_tableCell(ubicacionTable,row,"Dirección",false,false);
+            generate_tableCell(ubicacionTable,row,textBox_DireccionSuceso,false,true);
+            textBox_DireccionSuceso.parentNode.colSpan = "5";
+
+            row = document.createElement('tr');
+
+            textBox_TipoLugar = document.createElement('input');
+            textBox_TipoLugar.style.width = "600px";
+            textBox_TipoLugar.style.height = "23px";
+
+            generate_tableCell(ubicacionTable,row,"Tipo de Lugar (Via publica, casa, local comercial, etc)",false,false);
+            generate_tableCell(ubicacionTable,row,textBox_TipoLugar,false,true);
+            textBox_TipoLugar.parentNode.colSpan = "5";
+
+            row = document.createElement('tr');
+
+            generate_tableCell(imputadoTable,row,"   ___  ",true,false);
+            generate_tableCell(imputadoTable,row,"NOMBRE",true,false);
+            //row.childNode[0].colSpan = "2";
+            generate_tableCell(imputadoTable,row,"CEDULA",true,false);
+            generate_tableCell(imputadoTable,row,"SEXO",true,false);
+            generate_tableCell(imputadoTable,row,"EDAD",true,false);
+            generate_tableCell(imputadoTable,row,"NACIONALIDAD",true,false);
+            generate_tableCell(imputadoTable,row,"FECHA DE NACIMIENTO",true,false);
+
+            row.childNodes[1].style.width = "300px";
+
+            row = document.createElement('tr');
+
+            textBox_Nombre = document.createElement('input');
+            textBox_Cedula = document.createElement('input');
+            textBox_Sexo = document.createElement('input');
+            textBox_Edad = document.createElement('input');
+            textBox_Nacionalidad = document.createElement('input');
+            textBox_FechaNacimiento = document.createElement('input');
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,textBox_Nombre,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Cedula,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Sexo,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Edad,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Nacionalidad,false,true);
+            generate_tableCell(imputadoTable,row,textBox_FechaNacimiento,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionExacta = document.createElement('input');
+            textBox_DireccionExacta.style.width = "540px";
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"DIRECCION EXACTA Y TELEFONO",false,false);
+            generate_tableCell(imputadoTable,row,textBox_DireccionExacta,false,true);
+			textBox_horaAprencion = document.createElement('input');
+            textBox_horaAprencion.style.width = "100px";
+			//textbox_horaAprencion.style.placeholder="Hora de aprencion";
+            //console.log(row.childNodes[2]);
+            row.childNodes[2].colSpan = "5";
+
+            row = document.createElement('tr');
+
+            textBox_conocidoComo = document.createElement('input');
+            radio_aprendidoSi = document.createElement('input');
+            radio_aprendidoSi.setAttribute("type", "radio");
+
+            radio_aprendidoNo = document.createElement('input');
+            radio_aprendidoNo.setAttribute("type", "radio");
+
+            textBox_conocidoComo.style.width = "208px";
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"CONOCIDO COMO:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_conocidoComo,false,true);
+            generate_tableCell(imputadoTable,row,radio_aprendidoSi,false,true);
+            generate_tableCell(imputadoTable,row,radio_aprendidoNo,false,true);
+			generate_tableCell(imputadoTable,row,textBox_horaAprencion,false,true);
+
+
+            //console.log(row.childNodes[2]);
+            row.childNodes[1].colSpan = "0";
+            row.childNodes[1].style.width = "100px";
+            row.childNodes[2].colSpan = "2";
+            row.childNodes[3].appendChild(document.createTextNode("Aprendido: Si"));
+            row.childNodes[3].style.width = "80px";
+
+            row.childNodes[4].appendChild(document.createTextNode("No"));
+            row.childNodes[4].style.width = "80px";
+			//row.childNodes[5].style="placeholder='Hora de Aprencion'";
+            //row.childNodes[4].value = "Firma";
+			
+			row = document.createElement('tr');
+
+            checkBox_AbstenerseDeclarar = document.createElement('input');
+            checkBox_AbstenerseDeclarar.setAttribute("type", "checkbox");
+			
+			checkBox_ContarAbogado = document.createElement('input');
+            checkBox_ContarAbogado.setAttribute("type", "checkbox");
+			
+			checkBox_ConocerMotivoAprencion = document.createElement('input');
+            checkBox_ConocerMotivoAprencion.setAttribute("type", "checkbox");
+			
+			generate_tableCell(imputadoTable,row,"    ",true,false);
+			generate_tableCell(imputadoTable,row,"SE INDICA PRINCIPALES DERECHOS",false,false);
+			generate_tableCell(imputadoTable,row,checkBox_AbstenerseDeclarar,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_ContarAbogado,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_ConocerMotivoAprencion,false,true);
+			
+			row.childNodes[2].appendChild(document.createTextNode("1.Abstenerese a declarar"));
+            row.childNodes[2].style.width = "80px";
+			row.childNodes[3].appendChild(document.createTextNode("Contar con un abogado defensor"));
+            row.childNodes[3].style.width = "80px";
+			row.childNodes[4].appendChild(document.createTextNode("Conocer el motivo de su aprencion"));
+            row.childNodes[4].style.width = "80px";
+			
+			row = document.createElement('tr');
+			
+			radio_entendio=document.createElement('input');
+			radio_entendio.setAttribute("type", "radio");
+			
+			radio_entendioNo=document.createElement('input');
+			radio_entendioNo.setAttribute("type","radio");
+			
+			checkBox_firma = document.createElement('input');
+            checkBox_firma.setAttribute("type", "checkbox");
+
+            checkBox_NoSabeFirmar = document.createElement('input');
+            checkBox_NoSabeFirmar.setAttribute("type", "checkbox");
+			
+			generate_tableCell(imputadoTable,row,"    ",true,false);
+			generate_tableCell(imputadoTable,row,"ENTENDIDOS",false,false);
+			generate_tableCell(imputadoTable,row,radio_entendio,false,true);
+			generate_tableCell(imputadoTable,row,radio_entendioNo,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_firma,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_NoSabeFirmar,false,true);
+			
+			row.childNodes[2].appendChild(document.createTextNode("SI"));
+			row.childNodes[2].style.width = "80px";
+			row.childNodes[3].appendChild(document.createTextNode("NO"));
+			row.childNodes[3].style.width = "80px";	
+			row.childNodes[4].appendChild(document.createTextNode("No quiso firmar"));
+			row.childNodes[4].style.width = "80px";
+			row.childNodes[5].appendChild(document.createTextNode("No sabe firmar"));
+			row.childNodes[5].style.width = "80px";
+			
+			row = document.createElement('tr');
+
+            textBox_rasgos = document.createElement('input');
+            textBox_rasgos.style.width = "500px";
+
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"RASGOS FISICOS:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_rasgos,false,true);
+
+            row.childNodes[2].colSpan = "5";
+			
+
+
+            row = document.createElement('tr');
+
+            textBox_vestimenta = document.createElement('input');
+            textBox_vestimenta.style.width = "500px";
+
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"VESTIMENTA:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_vestimenta,false,true);
+
+            row.childNodes[2].colSpan = "5";
+			
+			//////////////////////////segundo espacio/////////////////////////
+
+		    row = document.createElement('tr');
+
+            generate_tableCell(imputadoTable,row,"   ___  ",true,false);
+            generate_tableCell(imputadoTable,row,"NOMBRE",true,false);
+            //row.childNode[0].colSpan = "2";
+            generate_tableCell(imputadoTable,row,"CEDULA",true,false);
+            generate_tableCell(imputadoTable,row,"SEXO",true,false);
+            generate_tableCell(imputadoTable,row,"EDAD",true,false);
+            generate_tableCell(imputadoTable,row,"NACIONALIDAD",true,false);
+            generate_tableCell(imputadoTable,row,"FECHA DE NACIMIENTO",true,false);
+
+            row.childNodes[1].style.width = "300px";
+
+            row = document.createElement('tr');
+
+            textBox_Nombre3 = document.createElement('input');
+            textBox_Cedula3 = document.createElement('input');
+            textBox_Sexo3 = document.createElement('input');
+            textBox_Edad3 = document.createElement('input');
+            textBox_Nacionalidad3 = document.createElement('input');
+            textBox_FechaNacimiento3 = document.createElement('input');
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,textBox_Nombre3,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Cedula3,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Sexo3,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Edad3,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Nacionalidad3,false,true);
+            generate_tableCell(imputadoTable,row,textBox_FechaNacimiento3,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionExacta3 = document.createElement('input');
+            textBox_DireccionExacta3.style.width = "540px";
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"DIRECCION EXACTA Y TELEFONO",false,false);
+            generate_tableCell(imputadoTable,row,textBox_DireccionExacta3,false,true);
+			textBox_horaAprencion3 = document.createElement('input');
+            textBox_horaAprencion3.style.width = "100px";
+			//textbox_horaAprencion.style.placeholder="Hora de aprencion";
+            //console.log(row.childNodes[2]);
+            row.childNodes[2].colSpan = "5";
+
+            row = document.createElement('tr');
+
+            textBox_conocidoComo3 = document.createElement('input');
+            radio_aprendidoSi3 = document.createElement('input');
+            radio_aprendidoSi3.setAttribute("type", "radio");
+
+            radio_aprendidoNo3 = document.createElement('input');
+            radio_aprendidoNo3.setAttribute("type", "radio");
+
+            textBox_conocidoComo3.style.width = "208px";
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"CONOCIDO COMO:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_conocidoComo3,false,true);
+            generate_tableCell(imputadoTable,row,radio_aprendidoSi3,false,true);
+            generate_tableCell(imputadoTable,row,radio_aprendidoNo3,false,true);
+			generate_tableCell(imputadoTable,row,textBox_horaAprencion3,false,true);
+
+
+            //console.log(row.childNodes[2]);
+            row.childNodes[1].colSpan = "0";
+            row.childNodes[1].style.width = "100px";
+            row.childNodes[2].colSpan = "2";
+            row.childNodes[3].appendChild(document.createTextNode("Aprendido: Si"));
+            row.childNodes[3].style.width = "80px";
+
+            row.childNodes[4].appendChild(document.createTextNode("No"));
+            row.childNodes[4].style.width = "80px";
+			//row.childNodes[5].style="placeholder='Hora de Aprencion'";
+            //row.childNodes[4].value = "Firma";
+			
+			row = document.createElement('tr');
+
+            checkBox_AbstenerseDeclarar3 = document.createElement('input');
+            checkBox_AbstenerseDeclarar3.setAttribute("type", "checkbox");
+			
+			checkBox_ContarAbogado3 = document.createElement('input');
+            checkBox_ContarAbogado3.setAttribute("type", "checkbox");
+			
+			checkBox_ConocerMotivoAprencion3 = document.createElement('input');
+            checkBox_ConocerMotivoAprencion3.setAttribute("type", "checkbox");
+			
+			generate_tableCell(imputadoTable,row,"    ",true,false);
+			generate_tableCell(imputadoTable,row,"SE INDICA PRINCIPALES DERECHOS",false,false);
+			generate_tableCell(imputadoTable,row,checkBox_AbstenerseDeclarar3,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_ContarAbogado3,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_ConocerMotivoAprencion3,false,true);
+			
+			row.childNodes[2].appendChild(document.createTextNode("1.Abstenerese a declarar"));
+            row.childNodes[2].style.width = "80px";
+			row.childNodes[3].appendChild(document.createTextNode("Contar con un abogado defensor"));
+            row.childNodes[3].style.width = "80px";
+			row.childNodes[4].appendChild(document.createTextNode("Conocer el motivo de su aprencion"));
+            row.childNodes[4].style.width = "80px";
+			
+			row = document.createElement('tr');
+			
+			radio_entendio3=document.createElement('input');
+			radio_entendio3.setAttribute("type", "radio");
+			
+			radio_entendioNo3=document.createElement('input');
+			radio_entendioNo3.setAttribute("type","radio");
+			
+			checkBox_firma3 = document.createElement('input');
+            checkBox_firma3.setAttribute("type", "checkbox");
+
+            checkBox_NoSabeFirmar3 = document.createElement('input');
+            checkBox_NoSabeFirmar3.setAttribute("type", "checkbox");
+			
+			generate_tableCell(imputadoTable,row,"    ",true,false);
+			generate_tableCell(imputadoTable,row,"ENTENDIDOS",false,false);
+			generate_tableCell(imputadoTable,row,radio_entendio3,false,true);
+			generate_tableCell(imputadoTable,row,radio_entendioNo3,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_firma3,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_NoSabeFirmar3,false,true);
+			
+			row.childNodes[2].appendChild(document.createTextNode("SI"));
+			row.childNodes[2].style.width = "80px";
+			row.childNodes[3].appendChild(document.createTextNode("NO"));
+			row.childNodes[3].style.width = "80px";	
+			row.childNodes[4].appendChild(document.createTextNode("No quiso firmar"));
+			row.childNodes[4].style.width = "80px";
+			row.childNodes[5].appendChild(document.createTextNode("No sabe firmar"));
+			row.childNodes[5].style.width = "80px";
+			
+			row = document.createElement('tr');
+
+            textBox_rasgos3 = document.createElement('input');
+            textBox_rasgos3.style.width = "500px";
+
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"RASGOS FISICOS:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_rasgos3,false,true);
+
+            row.childNodes[2].colSpan = "5";
+			
+
+
+            row = document.createElement('tr');
+
+            textBox_vestimenta3 = document.createElement('input');
+            textBox_vestimenta3.style.width = "500px";
+
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"VESTIMENTA:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_vestimenta3,false,true);
+
+            row.childNodes[2].colSpan = "5";
+			
+			
+			///////////////////////tercer espacio/////////////////////////
+			
+				    row = document.createElement('tr');
+
+            generate_tableCell(imputadoTable,row,"   ___  ",true,false);
+            generate_tableCell(imputadoTable,row,"NOMBRE",true,false);
+            //row.childNode[0].colSpan = "2";
+            generate_tableCell(imputadoTable,row,"CEDULA",true,false);
+            generate_tableCell(imputadoTable,row,"SEXO",true,false);
+            generate_tableCell(imputadoTable,row,"EDAD",true,false);
+            generate_tableCell(imputadoTable,row,"NACIONALIDAD",true,false);
+            generate_tableCell(imputadoTable,row,"FECHA DE NACIMIENTO",true,false);
+
+            row.childNodes[1].style.width = "300px";
+
+            row = document.createElement('tr');
+
+            textBox_Nombre2 = document.createElement('input');
+            textBox_Cedula2 = document.createElement('input');
+            textBox_Sexo2 = document.createElement('input');
+            textBox_Edad2 = document.createElement('input');
+            textBox_Nacionalidad2 = document.createElement('input');
+            textBox_FechaNacimiento2 = document.createElement('input');
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,textBox_Nombre2,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Cedula2,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Sexo2,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Edad2,false,true);
+            generate_tableCell(imputadoTable,row,textBox_Nacionalidad2,false,true);
+            generate_tableCell(imputadoTable,row,textBox_FechaNacimiento2,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionExacta2 = document.createElement('input');
+            textBox_DireccionExacta2.style.width = "540px";
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"DIRECCION EXACTA Y TELEFONO",false,false);
+            generate_tableCell(imputadoTable,row,textBox_DireccionExacta2,false,true);
+			textBox_horaAprencion2 = document.createElement('input');
+            textBox_horaAprencion2.style.width = "100px";
+			//textbox_horaAprencion.style.placeholder="Hora de aprencion";
+            //console.log(row.childNodes[2]);
+            row.childNodes[2].colSpan = "5";
+
+            row = document.createElement('tr');
+
+            textBox_conocidoComo2 = document.createElement('input');
+            radio_aprendidoSi2 = document.createElement('input');
+            radio_aprendidoSi2.setAttribute("type", "radio");
+
+            radio_aprendidoNo2 = document.createElement('input');
+            radio_aprendidoNo2.setAttribute("type", "radio");
+
+            textBox_conocidoComo2.style.width = "208px";
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"CONOCIDO COMO:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_conocidoComo2,false,true);
+            generate_tableCell(imputadoTable,row,radio_aprendidoSi2,false,true);
+            generate_tableCell(imputadoTable,row,radio_aprendidoNo2,false,true);
+			generate_tableCell(imputadoTable,row,textBox_horaAprencion2,false,true);
+
+
+            //console.log(row.childNodes[2]);
+            row.childNodes[1].colSpan = "0";
+            row.childNodes[1].style.width = "100px";
+            row.childNodes[2].colSpan = "2";
+            row.childNodes[3].appendChild(document.createTextNode("Aprendido: Si"));
+            row.childNodes[3].style.width = "80px";
+
+            row.childNodes[4].appendChild(document.createTextNode("No"));
+            row.childNodes[4].style.width = "80px";
+			//row.childNodes[5].style="placeholder='Hora de Aprencion'";
+            //row.childNodes[4].value = "Firma";
+			
+			row = document.createElement('tr');
+
+            checkBox_AbstenerseDeclarar2 = document.createElement('input');
+            checkBox_AbstenerseDeclarar2.setAttribute("type", "checkbox");
+			
+			checkBox_ContarAbogado2 = document.createElement('input');
+            checkBox_ContarAbogado2.setAttribute("type", "checkbox");
+			
+			checkBox_ConocerMotivoAprencion2 = document.createElement('input');
+            checkBox_ConocerMotivoAprencion2.setAttribute("type", "checkbox");
+			
+			generate_tableCell(imputadoTable,row,"    ",true,false);
+			generate_tableCell(imputadoTable,row,"SE INDICA PRINCIPALES DERECHOS",false,false);
+			generate_tableCell(imputadoTable,row,checkBox_AbstenerseDeclarar2,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_ContarAbogado2,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_ConocerMotivoAprencion2,false,true);
+			
+			row.childNodes[2].appendChild(document.createTextNode("1.Abstenerese a declarar"));
+            row.childNodes[2].style.width = "80px";
+			row.childNodes[3].appendChild(document.createTextNode("Contar con un abogado defensor"));
+            row.childNodes[3].style.width = "80px";
+			row.childNodes[4].appendChild(document.createTextNode("Conocer el motivo de su aprencion"));
+            row.childNodes[4].style.width = "80px";
+			
+			row = document.createElement('tr');
+			
+			radio_entendio2=document.createElement('input');
+			radio_entendio2.setAttribute("type", "radio");
+			
+			radio_entendioNo2=document.createElement('input');
+			radio_entendioNo2.setAttribute("type","radio");
+			
+			checkBox_firma2 = document.createElement('input');
+            checkBox_firma2.setAttribute("type", "checkbox");
+
+            checkBox_NoSabeFirmar2 = document.createElement('input');
+            checkBox_NoSabeFirmar2.setAttribute("type", "checkbox");
+			
+			generate_tableCell(imputadoTable,row,"    ",true,false);
+			generate_tableCell(imputadoTable,row,"ENTENDIDOS",false,false);
+			generate_tableCell(imputadoTable,row,radio_entendio2,false,true);
+			generate_tableCell(imputadoTable,row,radio_entendioNo2,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_firma2,false,true);
+			generate_tableCell(imputadoTable,row,checkBox_NoSabeFirmar2,false,true);
+			
+			row.childNodes[2].appendChild(document.createTextNode("SI"));
+			row.childNodes[2].style.width = "80px";
+			row.childNodes[3].appendChild(document.createTextNode("NO"));
+			row.childNodes[3].style.width = "80px";	
+			row.childNodes[4].appendChild(document.createTextNode("No quiso firmar"));
+			row.childNodes[4].style.width = "80px";
+			row.childNodes[5].appendChild(document.createTextNode("No sabe firmar"));
+			row.childNodes[5].style.width = "80px";
+			
+			row = document.createElement('tr');
+
+            textBox_rasgos2 = document.createElement('input');
+            textBox_rasgos2.style.width = "500px";
+
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"RASGOS FISICOS:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_rasgos2,false,true);
+
+            row.childNodes[2].colSpan = "5";
+			
+
+
+            row = document.createElement('tr');
+
+            textBox_vestimenta2 = document.createElement('input');
+            textBox_vestimenta2.style.width = "500px";
+
+
+            generate_tableCell(imputadoTable,row,"    ",true,false);
+            generate_tableCell(imputadoTable,row,"VESTIMENTA:",false,false);
+            generate_tableCell(imputadoTable,row,textBox_vestimenta2,false,true);
+
+            row.childNodes[2].colSpan = "5";
+			
+			
+
+		///////////////////////ofendido////////////////////////////////////////////
+		
+			row = document.createElement('tr');
+
+            generate_tableCell(ofendidoTable,row,"   ___  ",true,false);
+            generate_tableCell(ofendidoTable,row,"NOMBRE",true,false);
+            //row.childNode[0].colSpan = "2";
+            generate_tableCell(ofendidoTable,row,"CEDULA",true,false);
+            generate_tableCell(ofendidoTable,row,"SEXO",true,false);
+            generate_tableCell(ofendidoTable,row,"EDAD",true,false);
+            generate_tableCell(ofendidoTable,row,"NACIONALIDAD",true,false);
+            generate_tableCell(ofendidoTable,row,"FECHA DE NACIMIENTO",true,false);
+
+            row.childNodes[1].style.width = "300px";
+
+            row = document.createElement('tr');
+
+            textBox_Nombre4 = document.createElement('input');
+            textBox_Cedula4 = document.createElement('input');
+            textBox_Sexo4 = document.createElement('input');
+            textBox_Edad4 = document.createElement('input');
+            textBox_Nacionalidad4 = document.createElement('input');
+            textBox_FechaNacimiento4 = document.createElement('input');
+
+            generate_tableCell(ofendidoTable,row,"    ",true,false);
+            generate_tableCell(ofendidoTable,row,textBox_Nombre4,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Cedula4,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Sexo4,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Edad4,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Nacionalidad4,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_FechaNacimiento4,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionExacta4 = document.createElement('input');
+            textBox_DireccionExacta4.style.width = "540px";
+
+            generate_tableCell(ofendidoTable,row,"    ",true,false);
+            generate_tableCell(ofendidoTable,row,"DIRECCION EXACTA",false,false);
+            generate_tableCell(ofendidoTable,row,textBox_DireccionExacta4,false,true);
+			row.childNodes[2].colSpan = "5";
+			
+			row=document.createElement('tr');
+			
+			textBox_TelefonoCasa= document.createElement('input');
+			textBox_TelefonoTrabajo=document.createElement('input');
+			textBox_TelefonoCelular=document.createElement('input');
+			
+			generate_tableCell(ofendidoTable,row,"    ",true,false);
+			generate_tableCell(ofendidoTable,row,"TELÉFONOS: Casa Habitación:",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_TelefonoCasa,false,true);
+			generate_tableCell(ofendidoTable,row,"Trabajo:",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_TelefonoTrabajo,false,true);
+			generate_tableCell(ofendidoTable,row,"Celular:",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_TelefonoCelular,false,true);
+			
+			row=document.createElement('tr');
+			
+			textBox_Profesion=document.createElement('input');
+			textBox_CorreoElectronico=document.createElement('input');
+			
+			generate_tableCell(ofendidoTable,row,"   ",true,false);
+			generate_tableCell(ofendidoTable,row, "PROFESION U OFICIO",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_Profesion,false,true);
+			generate_tableCell(ofendidoTable,row,"Correo electronico",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_CorreoElectronico,false,true);
+			
+			
+			////////////////////segundo espacio/////////////////////////
+			
+			row = document.createElement('tr');
+
+            generate_tableCell(ofendidoTable,row,"   ___  ",true,false);
+            generate_tableCell(ofendidoTable,row,"NOMBRE",true,false);
+            //row.childNode[0].colSpan = "2";
+            generate_tableCell(ofendidoTable,row,"CEDULA",true,false);
+            generate_tableCell(ofendidoTable,row,"SEXO",true,false);
+            generate_tableCell(ofendidoTable,row,"EDAD",true,false);
+            generate_tableCell(ofendidoTable,row,"NACIONALIDAD",true,false);
+            generate_tableCell(ofendidoTable,row,"FECHA DE NACIMIENTO",true,false);
+
+            row.childNodes[1].style.width = "300px";
+
+            row = document.createElement('tr');
+
+            textBox_Nombre5 = document.createElement('input');
+            textBox_Cedula5 = document.createElement('input');
+            textBox_Sexo5 = document.createElement('input');
+            textBox_Edad5 = document.createElement('input');
+            textBox_Nacionalidad5 = document.createElement('input');
+            textBox_FechaNacimiento5 = document.createElement('input');
+
+            generate_tableCell(ofendidoTable,row,"    ",true,false);
+            generate_tableCell(ofendidoTable,row,textBox_Nombre5,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Cedula5,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Sexo5,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Edad5,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_Nacionalidad5,false,true);
+            generate_tableCell(ofendidoTable,row,textBox_FechaNacimiento5,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionExacta5 = document.createElement('input');
+            textBox_DireccionExacta5.style.width = "540px";
+
+            generate_tableCell(ofendidoTable,row,"    ",true,false);
+            generate_tableCell(ofendidoTable,row,"DIRECCION EXACTA",false,false);
+            generate_tableCell(ofendidoTable,row,textBox_DireccionExacta4,false,true);
+			row.childNodes[2].colSpan = "5";
+			
+			row=document.createElement('tr');
+			
+			textBox_TelefonoCasa2= document.createElement('input');
+			textBox_TelefonoTrabajo2=document.createElement('input');
+			textBox_TelefonoCelular2=document.createElement('input');
+			
+			generate_tableCell(ofendidoTable,row,"    ",true,false);
+			generate_tableCell(ofendidoTable,row,"TELÉFONOS: Casa Habitación:",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_TelefonoCasa2,false,true);
+			generate_tableCell(ofendidoTable,row,"Trabajo:",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_TelefonoTrabajo2,false,true);
+			generate_tableCell(ofendidoTable,row,"Celular:",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_TelefonoCelular2,false,true);
+			
+			row=document.createElement('tr');
+			
+			textBox_Profesion2=document.createElement('input');
+			textBox_CorreoElectronico2=document.createElement('input');
+			
+			generate_tableCell(ofendidoTable,row,"   ",true,false);
+			generate_tableCell(ofendidoTable,row, "PROFESION U OFICIO",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_Profesion2,false,true);
+			generate_tableCell(ofendidoTable,row,"Correo electronico",false,false);
+			generate_tableCell(ofendidoTable,row,textBox_CorreoElectronico2,false,true);
+
+		/////////////////////////Testigos///////////////////////////////////////////
+		row = document.createElement('tr');
+
+            generate_tableCell(testigoTable,row,"   ___  ",true,false);
+            generate_tableCell(testigoTable,row,"NOMBRE",true,false);
+            //row.childNode[0].colSpan = "2";
+            generate_tableCell(testigoTable,row,"CEDULA O PASAPORTE",true,false);
+            generate_tableCell(testigoTable,row,"TELEFONO",true,false);
+
+
+            row.childNodes[1].style.width = "300px";
+			row.childNodes[1].colspan = "2";
+			row.childNodes[2].colspan = "2";
+			row.childNodes[2].style.width = "220px";
+			row.childNodes[3].colspan = "2";
+			row.childNodes[3].style.width = "220px";
+			
+
+            row = document.createElement('tr');
+
+            textBox_Nombre6 = document.createElement('input');
+            textBox_Cedula6 = document.createElement('input');
+            textBox_Telefono3 = document.createElement('input');
+
+
+            generate_tableCell(testigoTable,row,"    ",true,false);
+            generate_tableCell(testigoTable,row,textBox_Nombre6,false,true);
+            generate_tableCell(testigoTable,row,textBox_Cedula6,false,true);
+            generate_tableCell(testigoTable,row,textBox_Telefono3,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionExacta6 = document.createElement('input');
+            textBox_DireccionExacta6.style.width = "540px";
+
+            generate_tableCell(testigoTable,row,"    ",true,false);
+            generate_tableCell(testigoTable,row,"DIRECCION EXACTA",false,false);
+            generate_tableCell(testigoTable,row,textBox_DireccionExacta4,false,true);
+			row.childNodes[2].colSpan = "5";
+			
+			
+			row=document.createElement('tr');
+			
+			textBox_LugarTrabajo=document.createElement('input');
+			textBox_CorreoElectronico=document.createElement('input');
+			
+			generate_tableCell(testigoTable,row,"   ",true,false);
+			generate_tableCell(testigoTable,row, "LUGAR DE TRABAJO",false,false);
+			generate_tableCell(testigoTable,row,textBox_LugarTrabajo,false,true);
+			generate_tableCell(testigoTable,row,"Correo electronico",false,false);
+			generate_tableCell(testigoTable,row,textBox_CorreoElectronico,false,true);
+			
+			
+			
+			//////////segundo espacio/////////////////////////
+			row = document.createElement('tr');
+
+            generate_tableCell(testigoTable,row,"   ___  ",true,false);
+            generate_tableCell(testigoTable,row,"NOMBRE",true,false);
+            //row.childNode[0].colSpan = "2";
+            generate_tableCell(testigoTable,row,"CEDULA O PASAPORTE",true,false);
+            generate_tableCell(testigoTable,row,"TELEFONO",true,false);
+
+
+            row.childNodes[1].style.width = "300px";
+			row.childNodes[1].colspan = "2";
+			row.childNodes[2].colspan = "2";
+			row.childNodes[2].style.width = "220px";
+			row.childNodes[3].colspan = "2";
+			row.childNodes[3].style.width = "220px";
+			
+
+            row = document.createElement('tr');
+
+            textBox_Nombre7 = document.createElement('input');
+            textBox_Cedula7 = document.createElement('input');
+            textBox_Telefono4 = document.createElement('input');
+
+
+            generate_tableCell(testigoTable,row,"    ",true,false);
+            generate_tableCell(testigoTable,row,textBox_Nombre7,false,true);
+            generate_tableCell(testigoTable,row,textBox_Cedula7,false,true);
+            generate_tableCell(testigoTable,row,textBox_Telefono4,false,true);
+
+            row = document.createElement('tr');
+
+            textBox_DireccionExacta7 = document.createElement('input');
+            textBox_DireccionExacta7.style.width = "540px";
+
+            generate_tableCell(testigoTable,row,"    ",true,false);
+            generate_tableCell(testigoTable,row,"DIRECCION EXACTA",false,false);
+            generate_tableCell(testigoTable,row,textBox_DireccionExacta7,false,true);
+			row.childNodes[2].colSpan = "5";
+			
+			
+			row=document.createElement('tr');
+			
+			textBox_LugarTrabajo2=document.createElement('input');
+			textBox_CorreoElectronico4=document.createElement('input');
+			
+			generate_tableCell(testigoTable,row,"   ",true,false);
+			generate_tableCell(testigoTable,row, "LUGAR DE TRABAJO",false,false);
+			generate_tableCell(testigoTable,row,textBox_LugarTrabajo2,false,true);
+			generate_tableCell(testigoTable,row,"Correo electronico",false,false);
+			generate_tableCell(testigoTable,row,textBox_CorreoElectronico4,false,true);
+			
+		
+        }
+
+        function ubicacionTable_toCell(obj,colIdx){
+            switch(colIdx){
+                case 0:
+                    content=document.createTextNode();
+                    return content;
+                case 1:
+                    content=document.createTextNode();
+                    return content;
+                case 2:
+                    content=document.createTextNode();
+                    return content;
+                };
+                return null;
+        }
+
+
+
+</script>
+</html>
