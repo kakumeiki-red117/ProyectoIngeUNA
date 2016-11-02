@@ -81,8 +81,8 @@ public class Database {
     private static final String PROTOCOLO = "jdbc:oracle:thin:";
     private static final String SERVIDOR = "localhost";
     private static final String PUERTO = "1521";
-    private static final String USUARIO = "sguc";
-    private static final String CLAVE = "k9sguc";
+    private static final String USUARIO = "sgk9";
+    private static final String CLAVE = "k9sg";
     private static final String BASEDATOS = "XE";
 }
 

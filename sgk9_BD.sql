@@ -1,3 +1,6 @@
+﻿--EXEC DBMS_XDB.SETHTTPPORT(3010);
+connect / as sysdba;
+
 CREATE TABLESPACE sgk9_perm_01
   DATAFILE 'sgk9_perm_01.dat' 
     SIZE 10M
@@ -22,9 +25,7 @@ GRANT create any procedure TO sgk9;
 GRANT create sequence TO sgk9;
 GRANT create synonym TO sgk9;
 
-
 connect sgk9/k9sg;
-
 
 create table provincias (
 	nombre varchar(12),
@@ -201,6 +202,23 @@ create table testigos(
 	CONSTRAINT id_te_FK FOREIGN KEY (id)
 	REFERENCES personas (id)
 );
+
+
+--***************************************	CANES	**********************************
+create table canes(
+	id varchar2(20),
+	nombre varchar2(20),
+	edad int,
+	raza varchar2(20),
+	constraint PKCanes PRIMARY KEY (id)
+);
+
+INSERT INTO canes values('1', 'Doby', 5, 'Chihuahua');
+INSERT INTO canes values('2', 'Chester', 6, 'Pastor Aleman');
+INSERT INTO canes values('3', 'Pearl', 7, 'Doberman');
+INSERT INTO canes values('4', 'Shark', 8, 'Labrador');
+
+--**************************************************************************************
 
 --create table acta_imput(
 --	acta varchar(20),
