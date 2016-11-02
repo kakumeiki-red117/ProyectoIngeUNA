@@ -1,32 +1,29 @@
-﻿
-connect / as sysdba;
-
-CREATE TABLESPACE sguc_perm_01
-  DATAFILE 'sguc_perm_01.dat' 
+CREATE TABLESPACE sgk9_perm_01
+  DATAFILE 'sgk9_perm_01.dat' 
     SIZE 10M
     REUSE
     AUTOEXTEND ON NEXT 10M MAXSIZE 200M;
 
-CREATE TEMPORARY TABLESPACE sguc_temp_01
-  TEMPFILE 'sguc_temp_01.dbf'
+CREATE TEMPORARY TABLESPACE sgk9_temp_01
+  TEMPFILE 'sgk9_temp_01.dbf'
     SIZE 5M
     AUTOEXTEND ON;
 
-create user sguc identified by k9sguc
-DEFAULT TABLESPACE sguc_perm_01
-  TEMPORARY TABLESPACE sguc_temp_01
-  QUOTA 20M on sguc_perm_01;
+create user sgk9 identified by k9sg
+DEFAULT TABLESPACE sgk9_perm_01
+  TEMPORARY TABLESPACE sgk9_temp_01
+  QUOTA 20M on sgk9_perm_01;
 
-GRANT create session TO sguc;
-GRANT create table TO sguc;
-GRANT create view TO sguc;
-GRANT create any trigger TO sguc;
-GRANT create any procedure TO sguc;
-GRANT create sequence TO sguc;
-GRANT create synonym TO sguc;
+GRANT create session TO sgk9;
+GRANT create table TO sgk9;
+GRANT create view TO sgk9;
+GRANT create any trigger TO sgk9;
+GRANT create any procedure TO sgk9;
+GRANT create sequence TO sgk9;
+GRANT create synonym TO sgk9;
 
 
-connect sguc/k9sguc;
+connect sgk9/k9sg;
 
 
 create table provincias (
@@ -558,7 +555,7 @@ commit;
 --PARA QUE SE ELIMINE EL USUARIO, DEBE ESTAR DESCONECTADO.
  /*
  
-connect sguc/k9sguc;
+connect sgk9/k9sg;
 
 DROP TABLE acta_imput cascade constraints PURGE;
 DROP TABLE actas cascade constraints PURGE;
@@ -583,12 +580,12 @@ connect / as sysdba;
 drop user sguc cascade;
 
 
-DROP TABLESPACE sguc_perm_01 
+DROP TABLESPACE sgk9_perm_01 
     INCLUDING CONTENTS 
 	and datafiles
     CASCADE CONSTRAINTS; 
 
-DROP TABLESPACE sguc_temp_01 
+DROP TABLESPACE sgk9_temp_01 
     INCLUDING CONTENTS 
 	and datafiles
     CASCADE CONSTRAINTS; 
