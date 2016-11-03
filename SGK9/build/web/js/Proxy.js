@@ -4,7 +4,7 @@ var Proxy = Proxy || {};
 Proxy.userLogin = function(user,callBack){
     var jsonText = JSON.stringify(user,replacer);
     var AJAX_req = new XMLHttpRequest();
-    var url="/SGUC/MuniServ?action=userLogin";
+    var url="/SGK9/MuniServ?action=userLogin";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -19,7 +19,7 @@ Proxy.userLogin = function(user,callBack){
 
 Proxy.userLogout = function(callBack){
     var AJAX_req = new XMLHttpRequest();
-    var url="/SGUC/MuniServ?action=userLogout";
+    var url="/SGK9/MuniServ?action=userLogout";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -31,9 +31,39 @@ Proxy.userLogout = function(callBack){
 };
 
 
+Proxy.getNextInf = function(callBack){
+    var AJAX_req = new XMLHttpRequest();
+    var url="/SGK9/MuniServ?action=getNextInf";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonText=AJAX_req.responseText;
+            var object = JSON.parse(jsonText,revive);
+            callBack(object);
+        }
+    };
+    AJAX_req.send();   
+};
+
+Proxy.getNextAct = function(callBack){
+    var AJAX_req = new XMLHttpRequest();
+    var url="/SGK9/MuniServ?action=getNextAct";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonText=AJAX_req.responseText;
+            var object = JSON.parse(jsonText,revive);
+            callBack(object);
+        }
+    };
+    AJAX_req.send();   
+};
+
 Proxy.getPersona = function(cedula,callBack){
     var AJAX_req = new XMLHttpRequest();
-    var url="/SGUC/MuniServ?action=getPersona";
+    var url="/SGK9/MuniServ?action=getPersona";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -48,7 +78,7 @@ Proxy.getPersona = function(cedula,callBack){
 
 Proxy.getImputados = function(informe,callBack){
     var AJAX_req = new XMLHttpRequest();
-    var url="/SGUC/MuniServ?action=getImputados";
+    var url="/SGK9/MuniServ?action=getImputados";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -63,7 +93,7 @@ Proxy.getImputados = function(informe,callBack){
 
 Proxy.getImputadoXInfCed = function(informe,cedula,callBack){
     var AJAX_req = new XMLHttpRequest();
-    var url="/SGUC/MuniServ?action=getImputadoXInfCed";
+    var url="/SGK9/MuniServ?action=getImputadoXInfCed";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -78,7 +108,7 @@ Proxy.getImputadoXInfCed = function(informe,cedula,callBack){
 
 Proxy.getSitio = function(informe,callBack){
     var AJAX_req = new XMLHttpRequest();
-    var url="/SGUC/MuniServ?action=getSitio";
+    var url="/SGK9/MuniServ?action=getSitio";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -94,7 +124,7 @@ Proxy.getSitio = function(informe,callBack){
 Proxy.insActa = function(acta,imput,callBack){
     var jsonText = JSON.stringify(acta,replacer);
     var AJAX_req = new XMLHttpRequest();
-    var url="/SGUC/MuniServ?action=insActa";
+    var url="/SGK9/MuniServ?action=insActa";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
