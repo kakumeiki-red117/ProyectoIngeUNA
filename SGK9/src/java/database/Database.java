@@ -83,6 +83,10 @@ public class Database {
     private static final String PUERTO = "1521";
     private static final String USUARIO = "sgk9";
     private static final String CLAVE = "k9sg";
+<<<<<<< HEAD:SGK9/src/java/database/Database.java
     private static final String BASEDATOS = "ORCL";
+=======
+    private static final String BASEDATOS = "XE";
+>>>>>>> origin/master:SGK9/src/java/sguc/database/Database.java
 }
 
