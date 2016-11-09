@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>K9</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+        <link rel="stylesheet" href="css/app.css">
+        <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+        <link href="css/informes.css" rel="stylesheet">
+        <link href="css/animate.min.css" rel="stylesheet"> 
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/lightbox.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet">
+        <link href="css/login_reset.css" rel="stylesheet">
+        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
+        <link href="css/responsive.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+
+    </head>
+    <body>
+        <!--.preloader-->
+        <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+        <!--/.preloader-->
+
+        <header id="home">
+
+            <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item active" style="background-image: url(images/slider/4.jpg)">
+                        <div class="caption">
+                            <h1 class="animated fadeInLeftBig">Bienvenido al <br><span>Sistema Gestor de la Unidad Canina</span></h1>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(images/slider/5.jpg)">
+
+                    </div>
+                    <div class="item" style="background-image: url(images/slider/6.jpg)">
+
+                    </div>
+                    <div class="item" style="background-image: url(images/slider/7.jpg)">
+
+                    </div>
+                    <div class="item" style="background-image: url(images/slider/8.jpg)">
+
+                    </div>
+                </div>
+                <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
+
+                <a id="tohash" href="#services"><i class="fa fa-angle-down"></i></a>
+
+            </div><!--/#home-slider-->
+
+            <div class="main-nav">
+                <div id = "afterlogo">
+                    <nav class="navbar navbar-inverse">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#">K9</a>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#!/view1">Servicios</a></li>
+                                <li><a href="#!/view2">Sobre Nosotros</a></li>
+                                <li><a href="#">Canes</a></li>
+                                <li><a href="#!/view4">Equipo</a></li>
+                                <li><a href="#!/view5">Contactenos</a></li>
+                                <li><a href="#!/Informes">Informes</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span>Regístrate</a></li>
+                                <li><a href="#!/view3"><span class="glyphicon glyphicon-log-in"></span>Inicio Sesion</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div><!--/#main-nav-->
+            <div>
+                <ul class="nav nav-pills pull-right">
+                    <li><a href="https://www.csv.go.cr/inicio" target="_blank">COSEVI</a></li>
+                    <li><a href="http://www.rnp.go.cr/" target="_blank">Registro Nacional</a></li>
+                    <li><a href="http://www.tse.go.cr/" target="_blank">Tribunal Supremo</a></li>
+                </ul>
+            </div>
+        </header><!--*******************/#home***********************-->
+
+
+
+        <!--**************************CALL THE HTML TEMPLATE/VIEW***************************************************-->
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div ng-view></div>
+
+
+
+
+
+        <footer id="footer">
+            <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <div class="container text-center">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a class="envelope" href="#"><i class="fa fa-envelope"></i></a></li>
+                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li> 
+                            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a class="tumblr" href="#"><i class="fa fa-tumblr-square"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>&copy; 2016 SGK9</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="pull-right">Designed by <a href="http://www.una.ac.cr/">Estudiantes de la UNA</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="js/app.js"></script>
+        <script src="view1/view1.js"></script>
+        <script src="view2/view2.js"></script>
+        <script src="view3/view3.js"></script>
+        <script src="view4/view4.js"></script>
+        <script src="view5/view5.js"></script>
+        <script src="view6/view6.js"></script>
+        <script src="Informes/Informes.js"></script>
+        <script src="ConsInf/ConsInf.js"></script>
+        <script src="ConsAct/ConsAct.js"></script>
+        <script src="CreInf/CreInf.js"></script>
+        <script src="CreAct/CreAct.js"></script>
+        <script src="components/version/version.js"></script>
+        <script src="components/version/version-directive.js"></script>
+        <script src="components/version/interpolate-filter.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="js/jquery.inview.min.js"></script>
+        <script type="text/javascript" src="js/wow.min.js"></script>
+        <script type="text/javascript" src="js/mousescroll.js"></script>
+        <script type="text/javascript" src="js/smoothscroll.js"></script>
+        <script type="text/javascript" src="js/jquery.countTo.js"></script>
+        <script type="text/javascript" src="js/lightbox.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/Proxy.js"></script>
+        <script type="text/javascript" src="js/Usuario.js"></script>
+        <script type="text/javascript" src="js/Sitio.js"></script>
+        <script type="text/javascript" src="js/Persona.js"></script>
+        <script type="text/javascript" src="js/Imputado.js"></script>
+        <script type="text/javascript" src="js/Testigo.js"></script>
+        <script type="text/javascript" src="js/OficialAc.js"></script>
+        <script type="text/javascript" src="js/Acta.js"></script>
+        <script type="text/javascript" src="js/BaseDatos.js"></script>
+    </body>
+</html>
