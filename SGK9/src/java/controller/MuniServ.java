@@ -28,7 +28,9 @@ import java.text.SimpleDateFormat;
 import model.Acta;
 import model.Informe;
 import model.Ofendido;
+import model.Oficial;
 import model.OficialAc;
+import model.OficialAs;
 import model.Persona;
 import model.Sitio;
 import model.Testigo;
@@ -60,13 +62,16 @@ public class MuniServ extends HttpServlet {
             RuntimeTypeAdapterFactory<Jsonable> rta = RuntimeTypeAdapterFactory.of(Jsonable.class,"_class")
              .registerSubtype(Usuario.class,"Usuario")
              .registerSubtype(Persona.class,"Persona")
+             .registerSubtype(Oficial.class,"Oficial")
              .registerSubtype(Sitio.class,"Sitio")
              .registerSubtype(Informe.class,"Informe")
              .registerSubtype(Acta.class,"Acta")
              .registerSubtype(Imputado.class,"Imputado")
              .registerSubtype(Ofendido.class,"Ofendido")
              .registerSubtype(Testigo.class,"Testigo")
-             .registerSubtype(OficialAc.class,"OficialAc");
+             .registerSubtype(OficialAc.class,"OficialAc")
+             .registerSubtype(OficialAs.class,"OficialAs")
+             ;
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String criteria;
@@ -77,6 +82,7 @@ public class MuniServ extends HttpServlet {
             Testigo testigo;
             Sitio sitio;
             Informe informe;
+            Oficial oficial;
             Acta acta;
             String accion = request.getParameter("action");
             List<Imputado> imputados;
@@ -129,6 +135,13 @@ public class MuniServ extends HttpServlet {
                     criteria = request.getParameter("cedula");
                     persona=Modelo.getPersonaXCedula(criteria);
                     json = gson.toJson(persona);
+                    out.write(json);
+                    break;
+                    
+                case "getOficial":
+                    criteria = request.getParameter("cedula");
+                    oficial=Modelo.getOficialXCedula(criteria);
+                    json = gson.toJson(oficial);
                     out.write(json);
                     break;
                     
@@ -200,9 +213,8 @@ public class MuniServ extends HttpServlet {
                 
                 case "insActa":
                     json = request.getParameter("acta");
-                    criteria = request.getParameter("imputado");
                     acta= gson.fromJson(json, Acta.class);
-                    res=Modelo.insActa(acta,criteria);
+                    res=Modelo.insActa(acta);
                     json = gson.toJson(res); 
                     out.write(json);
                     break;

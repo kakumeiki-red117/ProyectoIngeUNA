@@ -148,6 +148,7 @@ create table oficiales_ac(
 create table oficiales_as(
 	id varchar(20),
 	informe NUMBER,
+	movil varchar(6),
 	CONSTRAINT oas_PK PRIMARY KEY (id,informe),
 	CONSTRAINT informe_oas_FK FOREIGN KEY (informe)
 	REFERENCES informes (id),
@@ -212,6 +213,7 @@ create table testigos(
 CREATE VIEW V_IMPUTADOS AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,I.INFORME,I.ACTA,I.DIRECCION,I.TELEFONO,I.ALIAS,I.APREHENDIDO,I.HORA_APREHENSION,I.ENTENDIDOS,I.MOTIVO_NOFIRMA,I.RASGOS,I.VESTIMENTA FROM PERSONAS P, IMPUTADOS I WHERE P.ID = I.ID WITH READ ONLY;
 CREATE VIEW V_OFENDIDOS AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,O.INFORME,O.DELITO,O.TELEFONO_CASA,O.TELEFONO_TRABAJO,O.TELEFONO_MOVIL,O.OFICIO,O.EMAIL FROM PERSONAS P, OFENDIDOS O WHERE P.ID = O.ID WITH READ ONLY;
 CREATE VIEW V_TESTIGOS AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,T.INFORME,T.DIRECCION,T.LUGAR_TRABAJO,T.TELEFONO,T.EMAIL FROM PERSONAS P, TESTIGOS T WHERE P.ID = T.ID WITH READ ONLY;
+CREATE VIEW V_OFICIALES AS SELECT P.ID,P.NOMBRE,P.APELLIDO1,P.APELLIDO2,P.SEXO,P.EDAD,P.NACIONALIDAD,P.NACIMIENTO,O.UNIDAD FROM PERSONAS P, OFICIALES O WHERE P.ID = O.ID WITH READ ONLY;
 
 
 
@@ -383,11 +385,35 @@ insert into anunciantes values('Calidad Policial');
 insert into anunciantes values('Denuncia');
 insert into anunciantes values('Otro');
 
+insert into organismos values('Fuerza Publica');
+insert into organismos values('Cruz Roja');
 insert into organismos values('Bomberos');
 insert into organismos values('OIJ');
 insert into organismos values('Transito');
 insert into organismos values('Otro');
 
+
+insert into personas values(
+	'602620682',
+	'Alexander',
+	'Esquivel',
+	'Duarte',
+	'M',
+	30,
+	'Costarricense',
+	'19/dec/1985'
+);
+
+insert into personas values(
+	'112740010',
+	'Jorge',
+	'Cordero',
+	'Nunez',
+	'M',
+	30,
+	'Costarricense',
+	'19/dec/1985'
+);
 
 insert into personas values(
 	'112345678',
@@ -443,91 +469,100 @@ insert into personas values(
 	'1/dec/1949'
 );
 
-
-
-insert into informes values(
-	'1',
-	'descrip afasa',
-	'no se que va aqui',
-	'Denuncia',
-	'OIJ',
-	'23',
-	'Bomberos',
-	'232',
-	'1',
-	'123',
-	'11/oct/2016',
-	'tipodoc1',
-	'1422'
+insert into oficiales values(
+	'602620682',
+	'k9'
 );
 
-insert into sitios values(
-	'1',
-	to_date('11/oct/2016 11:34:22','DD:MON:YYYY HH24:MI:SS'),
-	'Heredia',
-	'Flores',
-	'San Joaquin',
-	'cinco esquinas',
-	'a la par de la pulperia',
-	'residencia'
+insert into oficiales values(
+	'112740010',
+	'k9'
 );
 
-insert into imputados values(
-	'401344356',
-	'1',
-	'',
-	'por alla',
-	'54323456',
-	'La Mami',
-	1,
-	to_date('11:55:34','HH24:MI:SS'),
-	0,
-	'no sabe',
-	'fea',
-	'ninguna'
-);
 
-insert into imputados values(
-	'8345766',
-	'1',
-	'',
-	'por alla',
-	'76523493',
-	'El Patron',
-	1,
-	to_date('23:55:34','HH24:MI:SS'),
-	1,
-	'no quiso',
-	'gordo y feo',
-	'camisa blanca, pantalon verde'
-);
+--insert into informes values(
+--	'1',
+--	'descrip afasa',
+--	'no se que va aqui',
+--	'Denuncia',
+--	'OIJ',
+--	'23',
+--	'Bomberos',
+--	'232',
+--	'1',
+--	'123',
+--	'11/oct/2016',
+--	'tipodoc1',
+--	'1422'
+--);
 
-insert into ofendidos values(
-	'203451234',
-	'1',
-	'robo agravado',
-	'por aqui',
-	'22453233',
-	'25955432',
-	'87323233',
-	'panadero',
-	'pana_dero@hotmail.com'
-);
+--insert into sitios values(
+--	'1',
+--	to_date('11/oct/2016 11:34:22','DD:MON:YYYY HH24:MI:SS'),
+--	'Heredia',
+--	'Flores',
+--	'San Joaquin',
+--	'cinco esquinas',
+--	'a la par de la pulperia',
+--	'residencia'
+--);
 
-insert into testigos values(
-	'603456783',
-	'1',
-	'por el palo de mango',
-	'ICE',
-	'88555324',
-	'hello_ele@hotmail.com'
-);
+--insert into imputados values(
+--	'401344356',
+--	'1',
+--	'',
+--	'por alla',
+--	'54323456',
+--	'La Mami',
+--	1,
+--	to_date('11:55:34','HH24:MI:SS'),
+--	0,
+--	'no sabe',
+--	'fea',
+--	'ninguna'
+--);
 
-insert into actas values(
-	'1',
-	'1',
-	'La vara es que el mae tenia la puya y se la quitamos'
-);
+--insert into imputados values(
+--	'8345766',
+--	'1',
+--	'',
+--	'por alla',
+--	'76523493',
+--	'El Patron',
+--	1,
+--	to_date('23:55:34','HH24:MI:SS'),
+--	1,
+--	'no quiso',
+--	'gordo y feo',
+--	'camisa blanca, pantalon verde'
+--);
+
+--insert into ofendidos values(
+--	'203451234',
+--	'1',
+--	'robo agravado',
+--	'por aqui',
+--	'22453233',
+--	'25955432',
+--	'87323233',
+--	'panadero',
+--	'pana_dero@hotmail.com'
+--);
+
+--insert into testigos values(
+--	'603456783',
+--	'1',
+--	'por el palo de mango',
+--	'ICE',
+--	'88555324',
+--	'hello_ele@hotmail.com'
+--);
+
+--insert into actas values(
+--	'1',
+--	'1',
+--	'La vara es que el mae tenia la puya y se la quitamos'
+--);
 
 commit;
 

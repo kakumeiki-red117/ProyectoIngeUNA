@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,6 +28,13 @@ public class Informe implements Serializable, Jsonable{
     Date fechaNotif;
     String tipoDoc;
     String numeroFolio;
+    Sitio sitio;
+    ArrayList<Imputado> lImputados;
+    ArrayList<Ofendido> lOfendidos;
+    ArrayList<Testigo> lTestigos;
+    ArrayList<OficialAc> lOficialesAc;
+    ArrayList<OficialAs> lOficialesAs;
+    
 
     public String getInforme() {
         return informe;
@@ -130,6 +138,54 @@ public class Informe implements Serializable, Jsonable{
 
     public void setNumeroFolio(String numeroFolio) {
         this.numeroFolio = numeroFolio;
+    }
+
+    public Sitio getSitio() {
+        return sitio;
+    }
+
+    public void setSitio(Sitio sitio) {
+        this.sitio = sitio;
+    }
+
+    public ArrayList<Imputado> getlImputados() {
+        return lImputados;
+    }
+
+    public void setlImputados(ArrayList<Imputado> lImputados) {
+        this.lImputados = lImputados;
+    }
+
+    public ArrayList<Ofendido> getlOfendidos() {
+        return lOfendidos;
+    }
+
+    public void setlOfendidos(ArrayList<Ofendido> lOfendidos) {
+        this.lOfendidos = lOfendidos;
+    }
+
+    public ArrayList<Testigo> getlTestigos() {
+        return lTestigos;
+    }
+
+    public void setlTestigos(ArrayList<Testigo> lTestigos) {
+        this.lTestigos = lTestigos;
+    }
+
+    public ArrayList<OficialAc> getlOficialesAc() {
+        return lOficialesAc;
+    }
+
+    public void setlOficialesAc(ArrayList<OficialAc> lOficialesAc) {
+        this.lOficialesAc = lOficialesAc;
+    }
+
+    public ArrayList<OficialAs> getlOficialesAs() {
+        return lOficialesAs;
+    }
+
+    public void setlOficialesAs(ArrayList<OficialAs> lOficialesAs) {
+        this.lOficialesAs = lOficialesAs;
     }
     
     

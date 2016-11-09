@@ -8,9 +8,10 @@ and open the template in the editor.
 <div id="services" class="informesForm" style="padding-top: 100px; padding-bottom: 100px;">
     <form method="post">
     <center>
+        <h4 id="acId" style="">Acta No. </h4>
         <br><br><br>
         <h6>Esta acta pertenece al informe policial No.</h6>
-        <input id="inpInforme" placeholder="No. Informe" type="text" onkeypress="presionaEnter2(event);" required="required"/>
+        <input id="inpInforme" placeholder="No. Informe" type="text" onkeypress="presionaEnter2(event);"/>
         <br><br><br>
         
 <h3>POLICIA MUNICIPAL DE HEREDIA</h3>
@@ -76,10 +77,15 @@ and open the template in the editor.
 <script>
 
         document.addEventListener("DOMContentLoaded", pageLoad);
-
+        var actId;
 
 
         function pageLoad(){
+            
+            Proxy.getNextAct(function(resp){
+                actId = resp;
+                document.getElementById("acId").innerHTML += actId;
+            });
 
             ubicacionTable = document.getElementById("ubicacionTable");
 
@@ -116,22 +122,22 @@ and open the template in the editor.
 
 
             textBox_FechaSuceso = document.createElement('input');
-            textBox_FechaSuceso.required = "required";
+            //textBox_FechaSuceso.required = "required";
 
             textBox_HoraSuceso = document.createElement('input');
-            textBox_HoraSuceso.required = "required";
+            //textBox_HoraSuceso.required = "required";
 
             textBox_Provincia = document.createElement('input');
-            textBox_Provincia.required = "required";
+            //textBox_Provincia.required = "required";
 
             textBox_Canton = document.createElement('input');
-            textBox_Canton.required = "required";
+            //textBox_Canton.required = "required";
 
             textBox_Distrito = document.createElement('input');
-            textBox_Distrito.required = "required";
+            //textBox_Distrito.required = "required";
 
             textBox_Barrio = document.createElement('input');
-            textBox_Barrio.required = "required";
+            //textBox_Barrio.required = "required";
 
 
 
@@ -622,7 +628,7 @@ and open the template in the editor.
                             checkBox_firma.checked = false;
                         }
                         if(imputado.motivo_sinfirma === "no sabe"){
-                            checkBox_NoSabeFirmar = true;
+                            checkBox_NoSabeFirmar.checked = true;
                         }else{
                             checkBox_NoSabeFirmar.checked = false;
                         }
@@ -693,8 +699,8 @@ and open the template in the editor.
         imput.cedula=textBox_Cedula2.value;
         imputs.push(imput);*/
         
-        acta = new Acta("1",document.getElementById("inpInforme").value,new Sitio(),imputs,document.getElementById("textDetalles").value,new Testigo(),new Imputado(),new OficialAc());
-        Proxy.insActa(acta,textBox_Cedula.value,function(resp){
+        acta = new Acta(actId,document.getElementById("inpInforme").value,new Sitio(),imputs,document.getElementById("textDetalles").value,new Testigo(),new Imputado(),new OficialAc());
+        Proxy.insActa(acta,function(resp){
             switch(resp){
                 case 0:
                     alert("Acta Creada");
@@ -706,7 +712,7 @@ and open the template in the editor.
         });
     }
     
-    function validar(){
+    /*function validar(){
         if(textBox_FechaSuceso.value === "" ||
                         textBox_HoraSuceso.value === "" ||
                         textBox_Provincia.value === "" ||
@@ -725,7 +731,254 @@ and open the template in the editor.
             return false;
         }
         return true;
+    }*/
+    
+    
+    
+    
+    function validar(){
+     
+        ok= true;
+        validarR();
+        if(textBox_FechaSuceso.value == "")
+        {
+           textBox_FechaSuceso.className += " error";
+  
+           ok=false;
+        }
+        if(textBox_HoraSuceso.value == "")
+        {
+           textBox_HoraSuceso.className += " error";
+           
+           ok=false;
+        }
+        if(textBox_Provincia.value == "")
+        {
+           textBox_Provincia.className += " error";
+           
+           ok=false;
+        }
+        if(textBox_Canton.value == "")
+        {
+           textBox_Canton.className += " error";
+           
+           ok=false;
+        }
+        if(textBox_Distrito.value == "")
+        {
+           textBox_Distrito.className += " error";
+           
+           ok=false;
+        }
+        if(textBox_Barrio.value == "")
+        {
+           textBox_Barrio.className += " error";
+           
+           ok=false;
+        }
+        if(textBox_DireccionSuceso.value == "")
+        {
+           textBox_DireccionSuceso.className += " error";
+           
+           ok=false;
+        }
+        if(textBox_TipoLugar.value == "")
+        {
+           textBox_TipoLugar.className += " error";
+           
+           ok=false;
+        }
+        if(textBox_Nombre.value == "")
+        {
+           textBox_Nombre.className += " error";
+           textBox_Nombre.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Cedula.value == "")
+        {
+           textBox_Cedula.className += " error";
+           textBox_Cedula.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Sexo.value == "")
+        {
+           textBox_Sexo.className += " error";
+           textBox_Sexo.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Edad.value == "")
+        {
+           textBox_Edad.className += " error";
+           textBox_Edad.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Nacionalidad.value == "")
+        {
+           textBox_Nacionalidad.className += " error";
+           textBox_Nacionalidad.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_FechaNacimiento.value == "")
+        {
+           textBox_FechaNacimiento.className += " error";
+           textBox_FechaNacimiento.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_DireccionExacta.value == "")
+        {
+           textBox_DireccionExacta.className += " error";
+           textBox_DireccionExacta.title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        if(trimfield(document.getElementById("textDetalles").value) == '')
+        {
+           document.getElementById("textDetalles").className += " error";
+           document.getElementById("textDetalles").title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        return ok;
     }
+    
+    
+    
+    function validarR(){
+     
+        //ok= false;
+        
+        textBox_FechaSuceso.className = textBox_FechaSuceso.className.replace(" error","");
+        textBox_HoraSuceso.className = textBox_HoraSuceso.className.replace(" error","");
+        textBox_Provincia.className = textBox_Provincia.className.replace(" error","");
+        textBox_Canton.className = textBox_Canton.className.replace(" error","");
+        textBox_Distrito.className = textBox_Distrito.className.replace(" error","");
+        textBox_Barrio.className = textBox_Barrio.className.replace(" error","");
+        textBox_DireccionSuceso.className = textBox_DireccionSuceso.className.replace(" error","");
+        textBox_TipoLugar.className = textBox_TipoLugar.className.replace(" error","");
+        textBox_Nombre.className = textBox_Nombre.className.replace(" error","");
+        textBox_Cedula.className = textBox_Cedula.className.replace(" error","");
+        textBox_Sexo.className = textBox_Sexo.className.replace(" error","");
+        textBox_Edad.className = textBox_Edad.className.replace(" error","");
+        textBox_Nacionalidad.className = textBox_Nacionalidad.className.replace(" error","");
+        textBox_FechaNacimiento.className = textBox_FechaNacimiento.className.replace(" error","");
+        textBox_DireccionExacta.className = textBox_DireccionExacta.className.replace(" error","");
+        document.getElementById("textDetalles").className = document.getElementById("textDetalles").className.replace(" error","");
+        
+        
+        /*if(textBox_FechaSuceso.value != "")
+        {
+           textBox_FechaSuceso.className = "noErrorBorder";
+  
+           ok=true;
+        }
+        if(textBox_HoraSuceso.value != "")
+        {
+           textBox_HoraSuceso.className = "noErrorBorder";
+           
+           ok=true;
+        }
+        if(textBox_Provincia.value != "")
+        {
+           textBox_Provincia.className = "noErrorBorder";
+           
+           ok=true;
+        }
+        if(textBox_Canton.value != "")
+        {
+           textBox_Canton.className.replace = "noErrorBorder";
+           
+           ok=true;
+        }
+        if(textBox_Distrito.value != "")
+        {
+           textBox_Distrito.className = "noErrorBorder";
+           
+           ok=true;
+        }
+        if(textBox_Barrio.value != "")
+        {
+           textBox_Barrio.className = "noErrorBorder";
+           
+           ok=true;
+        }
+        if(textBox_DireccionSuceso.value != "")
+        {
+           textBox_DireccionSuceso.className = "noErrorBorder";
+           
+           ok=true;
+        }
+        if(textBox_TipoLugar.value != "")
+        {
+           textBox_TipoLugar.className = "noErrorBorder";
+           
+           ok=true;
+        }
+        if(textBox_Nombre.value != "")
+        {
+           textBox_Nombre.className = "noErrorBorder";
+           textBox_Nombre.title="";
+           ok=true;
+        }
+        if(textBox_Cedula.value != "")
+        {
+           textBox_Cedula.className = "noErrorBorder";
+           textBox_Cedula.title="";
+           ok=true;
+        }
+        if(textBox_Sexo.value != "")
+        {
+           textBox_Sexo.className = "noErrorBorder";
+           textBox_Sexo.title="";
+           ok=true;
+        }
+        if(textBox_Edad.value != "")
+        {
+           textBox_Edad.className = "noErrorBorder";
+           textBox_Edad.title="";
+           ok=true;
+        }
+        if(textBox_Nacionalidad.value != "")
+        {
+           textBox_Nacionalidad.className = "noErrorBorder";
+           textBox_Nacionalidad.title="";
+           ok=true;
+        }
+        if(textBox_FechaNacimiento.value != "")
+        {
+           textBox_FechaNacimiento.className = "noErrorBorder";
+           textBox_FechaNacimiento.title="";
+           ok=true;
+        }
+        if(textBox_DireccionExacta.value != "")
+        {
+           textBox_DireccionExacta.className = "noErrorBorder";
+           textBox_DireccionExacta.title="";
+           ok=true;
+        }
+        
+        if(document.getElementById("textDetalles").value != '')
+        {
+           document.getElementById("textDetalles").className = "noErrorBorder";
+           document.getElementById("textDetalles").title="";
+           ok=true;
+        }
+        */
+        
+        return ok;
+    }
+    
+    
+    
+    function removeClass( classname, element ) {
+        var cn = element.className;
+        var rxp = new RegExp( "s?b"+classname+"b", "g" );
+        cn = cn.replace( rxp, '' );
+        alert(cn);
+        element.className = cn;
+    }
+    
+    
+    
     
     /*function trimAll(sString)
     {

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Ofendido extends Persona implements Serializable, Jsonable{
     
-    String Informe;
+    String informe;
     //String Persona;
     /*
     String cedula;
@@ -34,15 +34,15 @@ public class Ofendido extends Persona implements Serializable, Jsonable{
     String telefonoTrabajo;
     String telefonoMovil;
     String delito;
-    String Oficio;
+    String oficio;
     String email;
 
     public String getInforme() {
-        return Informe;
+        return informe;
     }
 
     public void setInforme(String Informe) {
-        this.Informe = Informe;
+        this.informe = Informe;
     }
 
     /*public String getPersona() {
@@ -94,11 +94,11 @@ public class Ofendido extends Persona implements Serializable, Jsonable{
     }
 
     public String getOficio() {
-        return Oficio;
+        return oficio;
     }
 
     public void setOficio(String Oficio) {
-        this.Oficio = Oficio;
+        this.oficio = Oficio;
     }
 
     public String getEmail() {

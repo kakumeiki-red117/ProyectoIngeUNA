@@ -9,6 +9,7 @@ and open the template in the editor.
 
 
 <div id="services" class="informesForm" style="padding-top: 200px; padding-bottom: 200px;">
+    <form method="post">
     <div>
     <center>
         <h4 id="infId" style="">Informe No. </h4>
@@ -179,20 +180,24 @@ and open the template in the editor.
                     </center>
                     
     </div>
+      <button id="bEnviar" style="margin-top: 50px;" type="submit" class="btn" onclick="enviar();">Enviar</button>
   </center>
 </div>
+        
+        </form>
     </div>
 
 <script>
 
         document.addEventListener("DOMContentLoaded", pageLoad);
-
+        var informeId;
 
 
         function pageLoad(){
             
             Proxy.getNextInf(function(resp){
-                document.getElementById("infId").innerHTML += resp;
+                informeId = resp;
+                document.getElementById("infId").innerHTML += informeId;
             });
              
 
@@ -254,13 +259,15 @@ and open the template in the editor.
 
             checkBox_FP = document.createElement('input');
 
-            checkBox_FP.setAttribute("type", "checkbox");
+            checkBox_FP.setAttribute("type", "radio");
+                    checkBox_FP.name = "alertor";
 
 			
 
 			checkBox_CM = document.createElement('input');
 
-            checkBox_CM.setAttribute("type", "checkbox");
+            checkBox_CM.setAttribute("type", "radio");
+            checkBox_CM.name = "alertor";
 
 
 
@@ -268,19 +275,22 @@ and open the template in the editor.
 
             checkBox_CP = document.createElement('input');
 
-            checkBox_CP.setAttribute("type", "checkbox");
+            checkBox_CP.setAttribute("type", "radio");
+            checkBox_CP.name = "alertor";
 
 
 
             checkBox_DN = document.createElement('input');
 
-            checkBox_DN.setAttribute("type", "checkbox");
+            checkBox_DN.setAttribute("type", "radio");
+            checkBox_DN.name = "alertor";
 
 			
 
-			textBox_Otro = document.createElement('input');
+			checkBox_Otro = document.createElement('input');
 
-			textBox_Otro.setAttribute("id","otro");
+			checkBox_Otro.setAttribute("type","radio");
+                        checkBox_Otro.name = "alertor";
 
 			
 
@@ -302,11 +312,11 @@ and open the template in the editor.
 
             generate_tableCell(AspectosTable,row,checkBox_DN,false,true);
 
-			generate_tableCell(AspectosTable,row,textBox_Otro,false,true);
+			generate_tableCell(AspectosTable,row,checkBox_Otro,false,true);
 
 
 
-            textBox_Otro.style.width = "65px";
+            //checkBox_Otro.style.width = "65px";
 
 			
 
@@ -338,15 +348,17 @@ and open the template in the editor.
 
 			
 
-            checkBox_FP = document.createElement('input');
+            radio_FP = document.createElement('input');
 
-            checkBox_FP.setAttribute("type", "checkbox");
+            radio_FP.setAttribute("type", "radio");
+            radio_FP.name = "asesor";
 
 			
 
-			checkBox_CR = document.createElement('input');
+			radio_CR = document.createElement('input');
 
-            checkBox_CR.setAttribute("type", "checkbox");
+            radio_CR.setAttribute("type", "radio");
+            radio_CR.name = "asesor";
 
 
 
@@ -368,9 +380,9 @@ and open the template in the editor.
 
             generate_tableCell(AspectosTable,row,"Asesor Legal(MSP):",false,false);
 
-            generate_tableCell(AspectosTable,row,checkBox_FP,false,true);
+            generate_tableCell(AspectosTable,row,radio_FP,false,true);
 
-            generate_tableCell(AspectosTable,row,checkBox_CR,false,true);
+            generate_tableCell(AspectosTable,row,radio_CR,false,true);
 
 			generate_tableCell(AspectosTable,row,"En caso de violencia Domestíca: Medidas  de  protección  Vigentes :   Si(  )   No(  ) Expediente N° ______________  Fecha Notificación ______________ Fecha en la que fue notificado personalmente el agresor ______________",false,false);
 
@@ -436,33 +448,35 @@ and open the template in the editor.
 
 
 
-            textBox_Nombre = document.createElement('input');
+            textBox_NombreO = document.createElement('input');
 
-            textBox_Cedula = document.createElement('input');
+            textBox_CedulaO = document.createElement('input');
+            
+            textBox_CedulaO.onkeypress = function(){presionaEnterO(event);};
 
-            textBox_Telefono= document.createElement('input');
+            textBox_TelefonoO= document.createElement('input');
 
-            textBox_Firma= document.createElement('input');
+            textBox_FirmaO= document.createElement('input');
 
-            textBox_Unidad= document.createElement('input');
+            textBox_UnidadO= document.createElement('input');
 
-            textBox_Hora= document.createElement('input');
+            textBox_HoraO= document.createElement('input');
 
 
 
             
 
-            generate_tableCell(AspectosTable,row,textBox_Nombre,false,true);
+            generate_tableCell(AspectosTable,row,textBox_NombreO,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Cedula,false,true);
+            generate_tableCell(AspectosTable,row,textBox_CedulaO,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Telefono,false,true);
+            generate_tableCell(AspectosTable,row,textBox_TelefonoO,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Firma,false,true);
+            generate_tableCell(AspectosTable,row,textBox_FirmaO,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Unidad,false,true);
+            generate_tableCell(AspectosTable,row,textBox_UnidadO,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Hora,false,true);
+            generate_tableCell(AspectosTable,row,textBox_HoraO,false,true);
 
 
 
@@ -470,33 +484,33 @@ and open the template in the editor.
 
 
 
-            textBox_Nombre2 = document.createElement('input');
+            textBox_NombreO2 = document.createElement('input');
 
-            textBox_Cedula2 = document.createElement('input');
+            textBox_CedulaO2 = document.createElement('input');
 
-            textBox_Telefono2= document.createElement('input');
+            textBox_TelefonoO2= document.createElement('input');
 
-            textBox_Firma2= document.createElement('input');
+            textBox_FirmaO2= document.createElement('input');
 
-            textBox_Unidad2= document.createElement('input');
+            textBox_UnidadO2= document.createElement('input');
 
-            textBox_Hora2= document.createElement('input');
+            textBox_HoraO2= document.createElement('input');
 
 
 
             
 
-            generate_tableCell(AspectosTable,row,textBox_Nombre2,false,true);
+            generate_tableCell(AspectosTable,row,textBox_NombreO2,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Cedula2,false,true);
+            generate_tableCell(AspectosTable,row,textBox_CedulaO2,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Telefono2,false,true);
+            generate_tableCell(AspectosTable,row,textBox_TelefonoO2,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Firma2,false,true);
+            generate_tableCell(AspectosTable,row,textBox_FirmaO2,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Unidad2,false,true);
+            generate_tableCell(AspectosTable,row,textBox_UnidadO2,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Hora2,false,true);
+            generate_tableCell(AspectosTable,row,textBox_HoraO2,false,true);
 
 
 
@@ -504,33 +518,33 @@ and open the template in the editor.
 
 
 
-            textBox_Nombre3 = document.createElement('input');
+            textBox_NombreO3 = document.createElement('input');
 
-            textBox_Cedula3 = document.createElement('input');
+            textBox_CedulaO3 = document.createElement('input');
 
-            textBox_Telefono3= document.createElement('input');
+            textBox_TelefonoO3= document.createElement('input');
 
-            textBox_Firma3= document.createElement('input');
+            textBox_FirmaO3= document.createElement('input');
 
-            textBox_Unidad3= document.createElement('input');
+            textBox_UnidadO3= document.createElement('input');
 
-            textBox_Hora3= document.createElement('input');
+            textBox_HoraO3= document.createElement('input');
 
 
 
             
 
-            generate_tableCell(AspectosTable,row,textBox_Nombre3,false,true);
+            generate_tableCell(AspectosTable,row,textBox_NombreO3,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Cedula3,false,true);
+            generate_tableCell(AspectosTable,row,textBox_CedulaO3,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Telefono3,false,true);
+            generate_tableCell(AspectosTable,row,textBox_TelefonoO3,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Firma3,false,true);
+            generate_tableCell(AspectosTable,row,textBox_FirmaO3,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Unidad3,false,true);
+            generate_tableCell(AspectosTable,row,textBox_UnidadO3,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Hora3,false,true);
+            generate_tableCell(AspectosTable,row,textBox_HoraO3,false,true);
 
 			
 
@@ -574,7 +588,7 @@ and open the template in the editor.
 
             generate_tableCell(AspectosTable,row,"Unidad de Origen",true,false);
 
-            generate_tableCell(AspectosTable,row,"Hora de informe Policial",true,false);
+            generate_tableCell(AspectosTable,row,"No. Movil",true,false);
 
 
 
@@ -584,33 +598,35 @@ and open the template in the editor.
 
 
 
-            textBox_Nombre4 = document.createElement('input');
+            textBox_NombreO4 = document.createElement('input');
 
-            textBox_Cedula4 = document.createElement('input');
+            textBox_CedulaO4 = document.createElement('input');
+            
+            textBox_CedulaO4.onkeypress = function(){presionaEnterO2(event);};
 
-            textBox_Telefono4= document.createElement('input');
+            textBox_TelefonoO4= document.createElement('input');
 
-            textBox_Firma4= document.createElement('input');
+            textBox_FirmaO4= document.createElement('input');
 
-            textBox_Unidad4= document.createElement('input');
+            textBox_UnidadO4= document.createElement('input');
 
-            textBox_Hora4= document.createElement('input');
+            textBox_HoraO4= document.createElement('input');
 
 
 
             
 
-            generate_tableCell(AspectosTable,row,textBox_Nombre4,false,true);
+            generate_tableCell(AspectosTable,row,textBox_NombreO4,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Cedula4,false,true);
+            generate_tableCell(AspectosTable,row,textBox_CedulaO4,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Telefono4,false,true);
+            generate_tableCell(AspectosTable,row,textBox_TelefonoO4,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Firma4,false,true);
+            generate_tableCell(AspectosTable,row,textBox_FirmaO4,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Unidad4,false,true);
+            generate_tableCell(AspectosTable,row,textBox_UnidadO4,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Hora4,false,true);
+            generate_tableCell(AspectosTable,row,textBox_HoraO4,false,true);
 
 
 
@@ -618,33 +634,33 @@ and open the template in the editor.
 
 
 
-            textBox_Nombre5 = document.createElement('input');
+            textBox_NombreO5 = document.createElement('input');
 
-            textBox_Cedula5 = document.createElement('input');
+            textBox_CedulaO5 = document.createElement('input');
 
-            textBox_Telefono5= document.createElement('input');
+            textBox_TelefonoO5= document.createElement('input');
 
-            textBox_Firma5= document.createElement('input');
+            textBox_FirmaO5= document.createElement('input');
 
-            textBox_Unidad5= document.createElement('input');
+            textBox_UnidadO5= document.createElement('input');
 
-            textBox_Hora5= document.createElement('input');
+            textBox_HoraO5= document.createElement('input');
 
 
 
             
 
-            generate_tableCell(AspectosTable,row,textBox_Nombre5,false,true);
+            generate_tableCell(AspectosTable,row,textBox_NombreO5,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Cedula5,false,true);
+            generate_tableCell(AspectosTable,row,textBox_CedulaO5,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Telefono5,false,true);
+            generate_tableCell(AspectosTable,row,textBox_TelefonoO5,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Firma5,false,true);
+            generate_tableCell(AspectosTable,row,textBox_FirmaO5,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Unidad5,false,true);
+            generate_tableCell(AspectosTable,row,textBox_UnidadO5,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Hora5,false,true);
+            generate_tableCell(AspectosTable,row,textBox_HoraO5,false,true);
 
 
 
@@ -652,33 +668,33 @@ and open the template in the editor.
 
 
 
-            textBox_Nombre6 = document.createElement('input');
+            textBox_NombreO6 = document.createElement('input');
 
-            textBox_Cedula6 = document.createElement('input');
+            textBox_CedulaO6 = document.createElement('input');
 
-            textBox_Telefono6= document.createElement('input');
+            textBox_TelefonoO6= document.createElement('input');
 
-            textBox_Firma6= document.createElement('input');
+            textBox_FirmaO6= document.createElement('input');
 
-            textBox_Unidad6= document.createElement('input');
+            textBox_UnidadO6= document.createElement('input');
 
-            textBox_Hora6= document.createElement('input');
+            textBox_HoraO6= document.createElement('input');
 
 
 
             
 
-            generate_tableCell(AspectosTable,row,textBox_Nombre6,false,true);
+            generate_tableCell(AspectosTable,row,textBox_NombreO6,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Cedula6,false,true);
+            generate_tableCell(AspectosTable,row,textBox_CedulaO6,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Telefono6,false,true);
+            generate_tableCell(AspectosTable,row,textBox_TelefonoO6,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Firma6,false,true);
+            generate_tableCell(AspectosTable,row,textBox_FirmaO6,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Unidad6,false,true);
+            generate_tableCell(AspectosTable,row,textBox_UnidadO6,false,true);
 
-            generate_tableCell(AspectosTable,row,textBox_Hora6,false,true);
+            generate_tableCell(AspectosTable,row,textBox_HoraO6,false,true);
 
 
 
@@ -881,6 +897,7 @@ and open the template in the editor.
 
             textBox_Nombre = document.createElement('input');
             textBox_Cedula = document.createElement('input');
+            textBox_Cedula.onkeypress = function(){presionaEnter(event);};
             textBox_Sexo = document.createElement('input');
             textBox_Edad = document.createElement('input');
             textBox_Nacionalidad = document.createElement('input');
@@ -1377,6 +1394,7 @@ and open the template in the editor.
 
             textBox_Nombre4 = document.createElement('input');
             textBox_Cedula4 = document.createElement('input');
+            textBox_Cedula4.onkeypress = function(){presionaEnter2(event);};
             textBox_Sexo4 = document.createElement('input');
             textBox_Edad4 = document.createElement('input');
             textBox_Nacionalidad4 = document.createElement('input');
@@ -1518,6 +1536,7 @@ and open the template in the editor.
 
             textBox_Nombre6 = document.createElement('input');
             textBox_Cedula6 = document.createElement('input');
+            textBox_Cedula6.onkeypress = function(){presionaEnter3(event);};
             textBox_Telefono3 = document.createElement('input');
 
 
@@ -1540,13 +1559,13 @@ and open the template in the editor.
 			row=document.createElement('tr');
 			
 			textBox_LugarTrabajo=document.createElement('input');
-			textBox_CorreoElectronico=document.createElement('input');
+			textBox_CorreoElectronico3=document.createElement('input');
 			
 			generate_tableCell(testigoTable,row,"   ",true,false);
 			generate_tableCell(testigoTable,row, "LUGAR DE TRABAJO",false,false);
 			generate_tableCell(testigoTable,row,textBox_LugarTrabajo,false,true);
 			generate_tableCell(testigoTable,row,"Correo electronico",false,false);
-			generate_tableCell(testigoTable,row,textBox_CorreoElectronico,false,true);
+			generate_tableCell(testigoTable,row,textBox_CorreoElectronico3,false,true);
 			
 			
 			
@@ -1636,23 +1655,928 @@ and open the template in the editor.
         }
         
         
+        
+        function cargaPersona(){
+            if(textBox_Cedula.value != "" && textBox_Cedula.value!==null){
+                Proxy.getPersona(textBox_Cedula.value,
+                function(persona){
+                    if(typeof persona.cedula !== "undefined"){
+                        textBox_Nombre.value = persona.nombre +" "+ persona.apellido1 +" "+  persona.apellido2;
+                        textBox_Cedula.value = persona.cedula;
+                        textBox_Sexo.value = persona.sexo;
+                        textBox_Edad.value = persona.edad;
+                        textBox_Nacionalidad.value = persona.nacionalidad;
+                        textBox_FechaNacimiento.value = persona.nacimiento;
+                    }
+                }
+                );
+            }
+        }
+        
+        function cargaPersona2(){
+            if(textBox_Cedula4.value != "" && textBox_Cedula4.value!==null){
+                Proxy.getPersona(textBox_Cedula4.value,
+                function(persona){
+                    if(typeof persona.cedula !== "undefined"){
+                        textBox_Nombre4.value = persona.nombre +" "+ persona.apellido1 +" "+  persona.apellido2;
+                        textBox_Cedula4.value = persona.cedula;
+                        textBox_Sexo4.value = persona.sexo;
+                        textBox_Edad4.value = persona.edad;
+                        textBox_Nacionalidad4.value = persona.nacionalidad;
+                        textBox_FechaNacimiento4.value = persona.nacimiento;
+                    }
+                }
+                );
+            }
+        }
+        
+        function cargaPersona3(){
+            if(textBox_Cedula6.value != "" && textBox_Cedula6.value!==null){
+                Proxy.getPersona(textBox_Cedula6.value,
+                function(persona){
+                    if(typeof persona.cedula !== "undefined"){
+                        textBox_Nombre6.value = persona.nombre +" "+ persona.apellido1 +" "+  persona.apellido2;
+                        textBox_Cedula6.value = persona.cedula;
+                    }
+                }
+                );
+            }
+        }
+        
+        function cargaOficial(){
+            if(textBox_CedulaO.value != "" && textBox_CedulaO.value!==null){
+                Proxy.getOficial(textBox_CedulaO.value,
+                function(oficial){
+                    if(typeof oficial.cedula !== "undefined"){
+                        textBox_NombreO.value = oficial.nombre +" "+ oficial.apellido1 +" "+  oficial.apellido2;
+                        textBox_CedulaO.value = oficial.cedula;
+                        textBox_UnidadO.value = oficial.unidad;
+                    }
+                }
+                );
+            }
+        }
+        
+        function cargaOficial2(){
+            if(textBox_CedulaO4.value != "" && textBox_CedulaO4.value!==null){
+                Proxy.getOficial(textBox_CedulaO4.value,
+                function(oficial){
+                    if(typeof oficial.cedula !== "undefined"){
+                        textBox_NombreO4.value = oficial.nombre +" "+ oficial.apellido1 +" "+  oficial.apellido2;
+                        textBox_CedulaO4.value = oficial.cedula;
+                        textBox_UnidadO4.value = oficial.unidad;
+                    }
+                }
+                );
+            }
+        }
+        
+        function getSitio(){
+            return new Sitio(informeId,textBox_FechaSuceso.value,textBox_HoraSuceso.value,textBox_Provincia.value,textBox_Canton.value,
+            textBox_Distrito.value,textBox_Barrio.value,textBox_DireccionSuceso.value,textBox_TipoLugar.value);
+            
+        }
+        
+        function getImputado1(){
+            let nameSplit = textBox_Nombre.value.split(" ");
+            let nombre = "";
+            for(let i=0; i<nameSplit.length-2;i++){
+                nombre += nameSplit[i]+" ";
+            }
+            
+            let dirSplit = textBox_DireccionExacta.value.split(" ");
+            let direccion = "";
+            for(let i=0; i<dirSplit.length-1;i++){
+                direccion += dirSplit[i]+" ";
+            }
+            
+            let aprehend;
+            if(radio_AprehendidoSi.checked){
+                aprehend = true;
+            }
+            if(radio_AprehendidoNo.checked){
+                aprehend = false;
+            }
+            
+            let entend;
+            if(radio_entendio.checked){
+                entend = true;
+            }
+            if(radio_entendioNo.checked){
+                entend = false;
+            }
+            let motivo;
+            if(checkBox_firma.checked){
+                motivo = "no quiso";
+            }
+            if(checkBox_NoSabeFirmar.checked){
+                motivo = "no sabe";
+            }
+            
+            return new Imputado(textBox_Cedula.value,nombre,nameSplit[nameSplit.length-2],nameSplit[nameSplit.length-1],
+            textBox_Sexo.value,textBox_Edad.value,textBox_Nacionalidad.value,textBox_FechaNacimiento.value,informeId,
+            "",direccion,dirSplit[dirSplit.length-1],textBox_conocidoComo.value,aprehend,textBox_horaaprehension.value,entend,
+            motivo,textBox_rasgos.value,textBox_vestimenta.value);
+        }
+        
+        function getOfendido1(){
+            let nameSplit = textBox_Nombre4.value.split(" ");
+            let nombre = "";
+            for(let i=0; i<nameSplit.length-2;i++){
+                nombre += nameSplit[i]+" ";
+            }
+            return new Ofendido(textBox_Cedula4.value,nombre,nameSplit[nameSplit.length-2],nameSplit[nameSplit.length-1],textBox_Sexo4.value,
+            textBox_Edad4.value,textBox_Nacionalidad4.value,textBox_FechaNacimiento4.value,informeId,"",textBox_DireccionExacta4.value,
+            textBox_TelefonoCasa.value,textBox_TelefonoTrabajo.value,textBox_TelefonoCelular.value,textBox_Profesion.value,textBox_CorreoElectronico.value);
+        }
+        
+        function getTestigo1(){
+            let nameSplit = textBox_Nombre6.value.split(" ");
+            let nombre = "";
+            for(let i=0; i<nameSplit.length-2;i++){
+                nombre += nameSplit[i]+" ";
+            }
+            return new Testigo(textBox_Cedula6.value,nombre,nameSplit[nameSplit.length-2],nameSplit[nameSplit.length-1],"M",
+            "23","","06/05/1976",informeId,"",textBox_DireccionExacta6.value,
+            textBox_Telefono3.value,textBox_LugarTrabajo.value,textBox_CorreoElectronico3.value);
+            
+        }
+        
+        function getOficialAc1(){
+            let nameSplit = textBox_NombreO.value.split(" ");
+            let nombre = "";
+            for(let i=0; i<nameSplit.length-2;i++){
+                nombre += nameSplit[i]+" ";
+            }
+            
+            return new OficialAc(textBox_CedulaO.value,nombre,nameSplit[nameSplit.length-2],nameSplit[nameSplit.length-1],"M","23","","06/05/1976",informeId,textBox_UnidadO.value,textBox_HoraO.value);
+        }
+        
+        function getOficialAs1(){
+            let nameSplit = textBox_NombreO4.value.split(" ");
+            let nombre = "";
+            for(let i=0; i<nameSplit.length-2;i++){
+                nombre += nameSplit[i]+" ";
+            }
+            
+            return new OficialAs(textBox_CedulaO4.value,nombre,nameSplit[nameSplit.length-2],nameSplit[nameSplit.length-1],"M","23","","06/05/1976",informeId,textBox_UnidadO4.value,textBox_HoraO4.value);
+        }
+        
+        
+        function guardaInforme(){
+            
+            let imputados = [];
+            imputados[0]=getImputado1();
+            
+            let ofendidos = [];
+            ofendidos[0]=getOfendido1();
+            
+            let testigos = [];
+            testigos[0]=getTestigo1();
+            
+            let oficialesAc = [];
+            oficialesAc[0]=getOficialAc1();
+            
+            let oficialesAs = [];
+            oficialesAs[0]=getOficialAs1();
+            
+            let anunciante;
+            if(checkBox_FP.checked){
+                anunciante = "Fuerza Publica";
+            }
+            if(checkBox_CM.checked){
+                anunciante = "Central Municipal";
+            }
+            if(checkBox_CP.checked){
+                anunciante = "Calidad Policial";
+            }
+            if(checkBox_DN.checked){
+                anunciante = "Denuncia";
+            }
+            if(checkBox_Otro.checked){
+                anunciante = "Otro";
+            }
+            
+            
+            let asesor;
+            if(radio_FP.checked){
+                asesor = "Fuerza Publica";
+            }
+            if(radio_CR.checked){
+                asesor = "Cruz Roja";
+            }
+            
+            
+            let informe = new Informe(informeId,document.getElementById("hechos").value,document.getElementById("diligencias").value,anunciante,
+            "Bomberos","",asesor,"",false,
+            "","11/10/2016",textBox_TipoD.value,textBox_NumFolio.value,getSitio(),imputados,
+            ofendidos,testigos,oficialesAc,oficialesAs);
+            
+            Proxy.insInforme(informe,function(resp){
+                switch(resp){
+                case 0:
+                    alert("Informe Creado");
+                    document.location = "#!/Informes";
+                    break;
+                case 1:
+                    alert("error");
+                    break;
+            }
+            });
+            
+        }
+        
+        
         function enviar(){
-            
-            /*var sitio = new Sitio("1",
-            textBox_FechaSuceso.value,
-            textBox_HoraSuceso.value,
-            textBox_Provincia.value,
-            textBox_Canton.value,
-            textBox_Distrito.value,
-            textBox_Barrio.value,
-            textBox_DireccionSuceso.value,
-            textBox_TipoLugar.value);
-            
-            
-            
-            alert(JSON.stringify(sitio,replacer));*/
-            
+            if(validar()){
+                /*var sitio = new Sitio("1",
+                textBox_FechaSuceso.value,
+                textBox_HoraSuceso.value,
+                textBox_Provincia.value,
+                textBox_Canton.value,
+                textBox_Distrito.value,
+                textBox_Barrio.value,
+                textBox_DireccionSuceso.value,
+                textBox_TipoLugar.value);
+
+                */
+
+                //alert(JSON.stringify("informe creado"));
+                guardaInforme();
+            }
     }
+    
+    /*function validar(){
+        if(textBox_FechaSuceso.value === "" ||
+                        textBox_HoraSuceso.value === "" ||
+                        textBox_Provincia.value === "" ||
+                        textBox_Canton.value === "" ||
+                        textBox_Distrito.value === "" ||
+                        textBox_Barrio.value === "" ||
+                        textBox_DireccionSuceso.value === "" ||
+                        textBox_TipoLugar.value === "" ||
+                        textBox_Nombre.value === "" ||
+                                textBox_Cedula.value  === "" ||
+                                textBox_Sexo.value  === "" ||
+                                textBox_Edad.value  === "" ||
+                                textBox_Nacionalidad.value  === "" ||
+                                textBox_FechaNacimiento.value  === "" ||
+                                trimfield(document.getElementById("hechos").value) == '' ||
+                                trimfield(document.getElementById("diligencias").value) == '' ||
+                                trimfield(document.getElementById("ofendidos").value) == '' ||
+                                trimfield(document.getElementById("testigos").value) == ''){
+            return false;
+        }
+        return true;
+    }*/
+                        
+                        
+                        
+                        
+                        
+    function validar(){
+        var ok =true;
+       validarR();
+        if(checkBox_FP.checked == 0 && checkBox_CM.checked == 0 && checkBox_CP.checked == 0 && checkBox_DN.checked == 0 /*&& textBox_Otro.value == ""*/ )
+        {
+           checkBox_FP.className = "errorBorder";
+           checkBox_FP.title="Informaccion Faltante.";
+           checkBox_CM.className = "errorBorder";
+           checkBox_CM.title="Informaccion Faltante.";
+           checkBox_CP.className = "errorBorder";
+           checkBox_CP.title="Informaccion Faltante.";
+           checkBox_DN.className = "errorBorder";
+           checkBox_DN.title="Informaccion Faltante.";
+           //textBox_Otro.className = "errorBorder";
+           //textBox_Otro.title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        if(radio_CR.checked == 0 && radio_FP.checked == 0)
+        {
+           radio_CR.className = "errorBorder";
+           radio_CR.title="Informaccion Faltante.";
+           radio_FP.className = "errorBorder";
+           radio_FP.title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        
+        
+        if(textBox_NombreO.value == "")
+        {
+           textBox_NombreO.className = "errorBorder";
+           textBox_NombreO.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_CedulaO.value == "")
+        {
+           textBox_CedulaO.className = "errorBorder";
+           textBox_CedulaO.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_TelefonoO.value == "")
+        {
+           textBox_TelefonoO.className = "errorBorder";
+           textBox_TelefonoO.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_FirmaO.value == "")
+        {
+           textBox_FirmaO.className = "errorBorder";
+           textBox_FirmaO.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_UnidadO.value == "")
+        {
+           textBox_UnidadO.className = "errorBorder";
+           textBox_UnidadO.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_HoraO.value == "")
+        {
+           textBox_HoraO.className = "errorBorder";
+           textBox_HoraO.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_NombreO4.value == "")
+        {
+           textBox_NombreO4.className = "errorBorder";
+           textBox_NombreO4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_CedulaO4.value == "")
+        {
+           textBox_CedulaO4.className = "errorBorder";
+           textBox_CedulaO4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_TelefonoO4.value == "")
+        {
+           textBox_TelefonoO4.className = "errorBorder";
+           textBox_TelefonoO4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_FirmaO4.value == "")
+        {
+           textBox_FirmaO4.className = "errorBorder";
+           textBox_FirmaO4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_UnidadO4.value == "")
+        {
+           textBox_UnidadO4.className = "errorBorder";
+           textBox_UnidadO4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_HoraO4.value == "")
+        {
+           textBox_HoraO4.className = "errorBorder";
+           textBox_HoraO4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_TipoD.value == "")
+        {
+           textBox_TipoD.className = "errorBorder";
+           textBox_TipoD.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_NumFolio.value == "")
+        {
+           textBox_NumFolio.className = "errorBorder";
+           textBox_NumFolio.title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        if(textBox_FechaSuceso.value == "")
+        {
+           textBox_FechaSuceso.className = "errorBorder";
+           textBox_FechaSuceso.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_HoraSuceso.value == "")
+        {
+           textBox_HoraSuceso.className = "errorBorder";
+           textBox_HoraSuceso.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Provincia.value == "")
+        {
+           textBox_Provincia.className = "errorBorder";
+           textBox_Provincia.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Canton.value == "")
+        {
+           textBox_Canton.className = "errorBorder";
+           textBox_Canton.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Distrito.value == "")
+        {
+           textBox_Distrito.className = "errorBorder";
+           textBox_Distrito.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Barrio.value == "")
+        {
+           textBox_Barrio.className = "errorBorder";
+           textBox_Barrio.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_DireccionSuceso.value == "")
+        {
+           textBox_DireccionSuceso.className = "errorBorder";
+           textBox_DireccionSuceso.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_TipoLugar.value == "")
+        {
+           textBox_TipoLugar.className = "errorBorder";
+           textBox_TipoLugar.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Nombre.value == "")
+        {
+           textBox_Nombre.className = "errorBorder";
+           textBox_Nombre.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Cedula.value == "")
+        {
+           textBox_Cedula.className = "errorBorder";
+           textBox_Cedula.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Sexo.value == "")
+        {
+           textBox_Sexo.className = "errorBorder";
+           textBox_Sexo.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Edad.value == "")
+        {
+           textBox_Edad.className = "errorBorder";
+           textBox_Edad.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Nacionalidad.value == "")
+        {
+           textBox_Nacionalidad.className = "errorBorder";
+           textBox_Nacionalidad.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_FechaNacimiento.value == "")
+        {
+           textBox_FechaNacimiento.className = "errorBorder";
+           textBox_FechaNacimiento.title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        if(textBox_DireccionExacta.value == "")
+        {
+           textBox_DireccionExacta.className = "errorBorder";
+           textBox_DireccionExacta.title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        if(document.getElementById("hechos").value == '')
+        {
+           document.getElementById("hechos").className = "errorBorder";
+           document.getElementById("hechos").title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        if(document.getElementById("diligencias").value == '')
+        {
+           document.getElementById("diligencias").className = "errorBorder";
+           document.getElementById("diligencias").title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(document.getElementById("ofendidos").value == '')
+        {
+           document.getElementById("ofendidos").className = "errorBorder";
+           document.getElementById("ofendidos").title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(document.getElementById("testigos").value == '')
+        {
+           document.getElementById("testigos").className = "errorBorder";
+           document.getElementById("testigos").title="Informaccion Faltante.";
+           ok=false;
+        }
+        
+        if(textBox_Nombre4.value == "")
+        {
+           textBox_Nombre4.className = "errorBorder";
+           textBox_Nombre4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Cedula4.value == "")
+        {
+           textBox_Cedula4.className = "errorBorder";
+           textBox_Cedula4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Sexo4.value == "")
+        {
+           textBox_Sexo4.className = "errorBorder";
+           textBox_Sexo4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Edad4.value == "")
+        {
+           textBox_Edad4.className = "errorBorder";
+           textBox_Edad4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Nacionalidad4.value == "")
+        {
+           textBox_Nacionalidad4.className = "errorBorder";
+           textBox_Nacionalidad4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_FechaNacimiento4.value == "")
+        {
+           textBox_FechaNacimiento4.className = "errorBorder";
+           textBox_FechaNacimiento4.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Nombre6.value == "")
+        {
+           textBox_Nombre6.className = "errorBorder";
+           textBox_Nombre6.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Cedula6.value == "")
+        {
+           textBox_Cedula6.className = "errorBorder";
+           textBox_Cedula6.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_DireccionExacta6.value == "")
+        {
+           textBox_DireccionExacta6.className = "errorBorder";
+           textBox_DireccionExacta6.title="Informaccion Faltante.";
+           ok=false;
+        }
+        if(textBox_Telefono3.value == "")
+        {
+           textBox_Telefono3.className = "errorBorder";
+           textBox_Telefono3.title="Informaccion Faltante.";
+           ok=false;
+        }
+    
+        return ok;
+    }
+    
+    
+    
+    function validarR(){
+        var ok =false;
+       
+        if(checkBox_FP.checked != 0 || checkBox_CM.checked != 0 || checkBox_CP.checked != 0 || checkBox_DN.checked != 0 /*|| textBox_Otro.value != ""*/ )
+        {
+           checkBox_FP.className = "noErrorBorder";
+           checkBox_FP.title="";
+           checkBox_CM.className = "noErrorBorder";
+           checkBox_CM.title="";
+           checkBox_CP.className = "noErrorBorder";
+           checkBox_CP.title="";
+           checkBox_DN.className = "noErrorBorder";
+           checkBox_DN.title="";
+           //textBox_Otro.className = "noErrorBorder";
+           //textBox_Otro.title="";
+           ok=true;
+        }
+        
+        
+         if(radio_CR.checked != 0 || radio_FP.checked != 0)
+        {
+           radio_CR.className = "noErrorBorder";
+           radio_CR.title="";
+           radio_FP.className = "noErrorBorder";
+           radio_FP.title="";
+           ok=true;
+        }
+        
+        if(textBox_NombreO.value != "")
+        {
+           textBox_NombreO.className = "noErrorBorder";
+           textBox_NombreO.title="";
+           ok=true;
+        }
+        if(textBox_CedulaO.value != "")
+        {
+           textBox_CedulaO.className = "noErrorBorder";
+           textBox_CedulaO.title="";
+           ok=true;
+        }
+        if(textBox_TelefonoO.value != "")
+        {
+           textBox_TelefonoO.className = "noErrorBorder";
+           textBox_TelefonoO.title="";
+           ok=true;
+        }
+        if(textBox_FirmaO.value != "")
+        {
+           textBox_FirmaO.className = "noErrorBorder";
+           textBox_FirmaO.title="";
+           ok=true;
+        }
+        if(textBox_UnidadO.value != "")
+        {
+           textBox_UnidadO.className = "noErrorBorder";
+           textBox_UnidadO.title="";
+           ok=true;
+        }
+        if(textBox_HoraO.value != "")
+        {
+           textBox_HoraO.className = "noErrorBorder";
+           textBox_HoraO.title="";
+           ok=true;
+        }
+        if(textBox_NombreO4.value != "")
+        {
+           textBox_NombreO4.className = "noErrorBorder";
+           textBox_NombreO4.title="";
+           ok=true;
+        }
+        if(textBox_CedulaO4.value != "")
+        {
+           textBox_CedulaO4.className = "noErrorBorder";
+           textBox_CedulaO4.title="";
+           ok=true;
+        }
+        if(textBox_TelefonoO4.value != "")
+        {
+           textBox_TelefonoO4.className = "noErrorBorder";
+           textBox_TelefonoO4.title="";
+           ok=true;
+        }
+        if(textBox_FirmaO4.value != "")
+        {
+           textBox_FirmaO4.className = "noErrorBorder";
+           textBox_FirmaO4.title="";
+           ok=true;
+        }
+        if(textBox_UnidadO4.value != "")
+        {
+           textBox_UnidadO4.className = "noErrorBorder";
+           textBox_UnidadO4.title="";
+           ok=true;
+        }
+        if(textBox_HoraO4.value != "")
+        {
+           textBox_HoraO4.className = "noErrorBorder";
+           textBox_HoraO4.title="";
+           ok=true;
+        }
+        if(textBox_TipoD.value != "")
+        {
+           textBox_TipoD.className = "noErrorBorder";
+           textBox_TipoD.title="";
+           ok=true;
+        }
+        if(textBox_NumFolio.value != "")
+        {
+           textBox_NumFolio.className = "noErrorBorder";
+           textBox_NumFolio.title="";
+           ok=true;
+        }
+        
+        if(textBox_FechaSuceso.value != "")
+        {
+           textBox_FechaSuceso.className = "noErrorBorder";
+           textBox_FechaSuceso.title="";
+           ok=true;
+        }
+        if(textBox_HoraSuceso.value != "")
+        {
+           textBox_HoraSuceso.className = "noErrorBorder";
+           textBox_HoraSuceso.title="";
+           ok=true;
+        }
+        if(textBox_Provincia.value != "")
+        {
+           textBox_Provincia.className = "noErrorBorder";
+           textBox_Provincia.title="";
+           ok=true;
+        }
+        if(textBox_Canton.value != "")
+        {
+           textBox_Canton.className = "noErrorBorder";
+           textBox_Canton.title="";
+           ok=true;
+        }
+        if(textBox_Distrito.value != "")
+        {
+           textBox_Distrito.className = "noErrorBorder";
+           textBox_Distrito.title="";
+           ok=true;
+        }
+        if(textBox_Barrio.value != "")
+        {
+           textBox_Barrio.className = "noErrorBorder";
+           textBox_Barrio.title="";
+           ok=true;
+        }
+        if(textBox_DireccionSuceso.value != "")
+        {
+           textBox_DireccionSuceso.className = "noErrorBorder";
+           textBox_DireccionSuceso.title="";
+           ok=true;
+        }
+        if(textBox_TipoLugar.value != "")
+        {
+           textBox_TipoLugar.className = "noErrorBorder";
+           textBox_TipoLugar.title="";
+           ok=true;
+        }
+        if(textBox_Nombre.value != "")
+        {
+           textBox_Nombre.className = "noErrorBorder";
+           textBox_Nombre.title="";
+           ok=true;
+        }
+        if(textBox_Cedula.value != "")
+        {
+           textBox_Cedula.className = "noErrorBorder";
+           textBox_Cedula.title="";
+           ok=true;
+        }
+        if(textBox_Sexo.value != "")
+        {
+           textBox_Sexo.className = "noErrorBorder";
+           textBox_Sexo.title="";
+           ok=true;
+        }
+        if(textBox_Edad.value != "")
+        {
+           textBox_Edad.className = "noErrorBorder";
+           textBox_Edad.title="";
+           ok=true;
+        }
+        if(textBox_Nacionalidad.value != "")
+        {
+           textBox_Nacionalidad.className = "noErrorBorder";
+           textBox_Nacionalidad.title="";
+           ok=true;
+        }
+        if(textBox_FechaNacimiento.value != "")
+        {
+           textBox_FechaNacimiento.className = "noErrorBorder";
+           textBox_FechaNacimiento.title="";
+           ok=true;
+        }
+        
+        if(textBox_DireccionExacta.value != "")
+        {
+           textBox_DireccionExacta.className = "noErrorBorder";
+           textBox_DireccionExacta.title="";
+           ok=true;
+        }
+        
+        if(document.getElementById("hechos").value != '')
+        {
+           document.getElementById("hechos").className = "noErrorBorder";
+           document.getElementById("hechos").title="";
+           ok=true;
+        }
+        
+        if(document.getElementById("diligencias").value != '')
+        {
+           document.getElementById("diligencias").className = "noErrorBorder";
+           document.getElementById("diligencias").title="";
+           ok=true;
+        }
+        if(document.getElementById("ofendidos").value != '')
+        {
+           document.getElementById("ofendidos").className = "noErrorBorder";
+           document.getElementById("ofendidos").title="";
+           ok=true;
+        }
+        if(document.getElementById("testigos").value != '')
+        {
+           document.getElementById("testigos").className = "noErrorBorder";
+           document.getElementById("testigos").title="";
+           ok=true;
+        }
+        
+        if(textBox_Nombre4.value != "")
+        {
+           textBox_Nombre4.className = "noErrorBorder";
+           textBox_Nombre4.title="";
+           ok=true;
+        }
+        if(textBox_Cedula4.value != "")
+        {
+           textBox_Cedula4.className = "noErrorBorder";
+           textBox_Cedula4.title="";
+           ok=true;
+        }
+        if(textBox_Sexo4.value != "")
+        {
+           textBox_Sexo4.className = "noErrorBorder";
+           textBox_Sexo4.title="";
+           ok=true;
+        }
+        if(textBox_Edad4.value != "")
+        {
+           textBox_Edad4.className = "noErrorBorder";
+           textBox_Edad4.title="";
+           ok=true;
+        }
+        if(textBox_Nacionalidad4.value != "")
+        {
+           textBox_Nacionalidad4.className = "noErrorBorder";
+           textBox_Nacionalidad4.title="";
+           ok=true;
+        }
+        if(textBox_FechaNacimiento4.value != "")
+        {
+           textBox_FechaNacimiento4.className = "noErrorBorder";
+           textBox_FechaNacimiento4.title="";
+           ok=true;
+        }
+        if(textBox_Nombre6.value != "")
+        {
+           textBox_Nombre6.className = "noErrorBorder";
+           textBox_Nombre6.title="";
+           ok=true;
+        }
+        if(textBox_Cedula6.value != "")
+        {
+           textBox_Cedula6.className = "noErrorBorder";
+           textBox_Cedula6.title="";
+           ok=true;
+        }
+        if(textBox_DireccionExacta6.value != "")
+        {
+           textBox_DireccionExacta6.className = "noErrorBorder";
+           textBox_DireccionExacta6.title="";
+           ok=true;
+        }
+        if(textBox_Telefono3.value != "")
+        {
+           textBox_Telefono3.className = "noErrorBorder";
+           textBox_Telefono3.title="";
+           ok=true;
+        }
+    
+        return ok;
+    }
+    
+    
+                        
+                        
+                        
+                        
+                        
+                        
+    
+    
+    
+    function trimfield(str) 
+    { 
+        return str.replace(/^\s+|\s+$/g,''); 
+    }
+
+
+        function presionaEnter(e){
+            if(e.keyCode === 13){
+                e.preventDefault(); 
+                cargaPersona();
+            }
+        }
+        
+        function presionaEnter2(e){
+            if(e.keyCode === 13){
+                e.preventDefault(); 
+                cargaPersona2();
+            }
+        }
+        
+        function presionaEnter3(e){
+            if(e.keyCode === 13){
+                e.preventDefault(); 
+                cargaPersona3();
+            }
+        }
+        
+        function presionaEnterO(e){
+            if(e.keyCode === 13){
+                e.preventDefault(); 
+                cargaOficial();
+            }
+        }
+        
+        function presionaEnterO2(e){
+            if(e.keyCode === 13){
+                e.preventDefault(); 
+                cargaOficial2();
+            }
+        }
         
 
 </script>

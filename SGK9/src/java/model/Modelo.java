@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import database.Database;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 /**
@@ -135,6 +136,24 @@ public class Modelo {
             }
             else{
                 return new Persona();
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+    
+    public static Oficial getOficialXCedula(String cedula) throws Exception{
+        try {
+            String sql="select * from "+
+                    "v_Oficiales  o  "+
+                    "where o.id = '%s'";
+            sql=String.format(sql,cedula);
+            ResultSet rs =  consultar.executeQuery(sql);
+            if (rs.next()) {
+                return toOficial(rs);
+            }
+            else{
+                return new Oficial();
             }
         } catch (SQLException ex) {
         }
@@ -302,11 +321,14 @@ public class Modelo {
         ResultSet rs =  consultar.executeUpdateWithKeys(sql);
 
         if (rs!=null) {
-            return 0;
+            
+            if (insSitio(informe.getSitio())==0 && insImputados(informe.getlImputados())==0 && 
+                    insOfendidos(informe.getlOfendidos())==0 && insTestigos(informe.getlTestigos())==0 && 
+                    insOficialesAc(informe.getlOficialesAc())==0 && insOficialesAs(informe.getlOficialesAs())==0){
+                return 0;
+            }
         }
-        else{
-            return 1;
-        }
+        return 1;
     }
    
     public static int insSitio(Sitio sitio) throws Exception{
@@ -333,7 +355,7 @@ public class Modelo {
         }
     }
     
-    public static int insActa(Acta acta,String imputado) throws Exception{
+    public static int insActa(Acta acta) throws Exception{
         String sql="insert into Actas "+
                 "(id,informe, detalles) "+
                 "values ('%s','%s','%s')";
@@ -394,6 +416,21 @@ public class Modelo {
         }
     }
     
+    public static int insImputados(ArrayList<Imputado> imputados){
+        
+        for (Imputado imputado : imputados) {
+            try {
+                if(insImputado(imputado)==1){
+                    return 1;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return 0;
+    }
+    
     public static int insOfendido(Ofendido ofendido) throws Exception{
         String sql="insert into Ofendidos "+
                 "(id,informe,delito,direccion,telefono_casa,telefono_trabajo,telefono_movil,oficio,email) "+
@@ -419,8 +456,23 @@ public class Modelo {
         }
     }
     
+    public static int insOfendidos(ArrayList<Ofendido> ofendidos){
+        
+        for (Ofendido ofendido : ofendidos) {
+            try {
+                if(insOfendido(ofendido)==1){
+                    return 1;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return 0;
+    }
+    
     public static int insTestigo(Testigo testigo) throws Exception{
-        String sql="insert into Ofendidos "+
+        String sql="insert into Testigos "+
                 "(id,informe,direccion,lugar_trabajo,telefono,email) "+
                 "values ('%s','%s','%s','%s','%s','%s')";
         
@@ -439,6 +491,21 @@ public class Modelo {
         else{
             return 1;
         }
+    }
+    
+    public static int insTestigos(ArrayList<Testigo> testigos){
+        
+        for (Testigo testigo : testigos) {
+            try {
+                if(insTestigo(testigo)==1){
+                    return 1;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return 0;
     }
     
     /*public static int insActImp(String acta, String imputado, String informe) throws Exception{
@@ -478,6 +545,21 @@ public class Modelo {
         }
     }
     
+    public static int insOficialesAs(ArrayList<OficialAs> oficiales){
+        
+        for (OficialAs oficial : oficiales) {
+            try {
+                if(insOficialAs(oficial)==1){
+                    return 1;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return 0;
+    }
+    
     public static int insOficialAc(OficialAc oficial) throws Exception{
         String sql="insert into oficiales_ac "+
                 "(id,informe,hora_confec) "+
@@ -495,6 +577,21 @@ public class Modelo {
         else{
             return 1;
         }
+    }
+    
+    public static int insOficialesAc(ArrayList<OficialAc> oficiales){
+        
+        for (OficialAc oficial : oficiales) {
+            try {
+                if(insOficialAc(oficial)==1){
+                    return 1;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return 0;
     }
     
     
@@ -626,6 +723,55 @@ public class Modelo {
         obj.setLugTrabajo(rs.getString("lugar_trabajo"));
         obj.setTelefono(rs.getString("telefono"));
         obj.setEmail(rs.getString("email"));
+        return obj;
+    }
+    
+    private static OficialAs toOficialAs(ResultSet rs) throws Exception{
+        OficialAs obj= new OficialAs();
+        obj.setCedula(rs.getString("id"));
+        obj.setNombre(rs.getString("nombre"));
+        obj.setApellido1(rs.getString("apellido1"));
+        obj.setApellido2(rs.getString("apellido2"));
+        obj.setSexo(rs.getString("sexo").charAt(0));
+        obj.setEdad(rs.getInt("edad"));
+        obj.setNacionalidad(rs.getString("nacionalidad"));
+        obj.setNacimiento(rs.getDate("nacimiento"));
+        obj.setInforme(rs.getString("informe"));
+        //obj.setPersona(rs.getString("id"));
+        obj.setUnidad(rs.getString("unidad"));
+        obj.setMovil(rs.getString("movil"));
+        return obj;
+    }
+    
+    private static OficialAc toOficialAc(ResultSet rs) throws Exception{
+        OficialAc obj= new OficialAc();
+        obj.setCedula(rs.getString("id"));
+        obj.setNombre(rs.getString("nombre"));
+        obj.setApellido1(rs.getString("apellido1"));
+        obj.setApellido2(rs.getString("apellido2"));
+        obj.setSexo(rs.getString("sexo").charAt(0));
+        obj.setEdad(rs.getInt("edad"));
+        obj.setNacionalidad(rs.getString("nacionalidad"));
+        obj.setNacimiento(rs.getDate("nacimiento"));
+        obj.setInforme(rs.getString("informe"));
+        //obj.setPersona(rs.getString("id"));
+        obj.setUnidad(rs.getString("unidad"));
+        obj.setHoraConfecc(rs.getTime("hora_confecc"));
+        return obj;
+    }
+    
+    private static Oficial toOficial(ResultSet rs) throws Exception{
+        Oficial obj= new Oficial();
+        obj.setCedula(rs.getString("id"));
+        obj.setNombre(rs.getString("nombre"));
+        obj.setApellido1(rs.getString("apellido1"));
+        obj.setApellido2(rs.getString("apellido2"));
+        obj.setSexo(rs.getString("sexo").charAt(0));
+        obj.setEdad(rs.getInt("edad"));
+        obj.setNacionalidad(rs.getString("nacionalidad"));
+        obj.setNacimiento(rs.getDate("nacimiento"));
+        //obj.setPersona(rs.getString("id"));
+        obj.setUnidad(rs.getString("unidad"));
         return obj;
     }
     
