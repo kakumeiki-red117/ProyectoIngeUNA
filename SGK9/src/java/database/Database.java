@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
@@ -31,7 +32,8 @@ public class Database {
     }
     
     public Connection getConnection(String servidorArg, String usuarioArg, String claveArg){
-        try {
+        
+        /*try {
             String servidor=(servidorArg==null?SERVIDOR:servidorArg);
             String usuario=(usuarioArg==null?USUARIO:usuarioArg);
             String clave=(claveArg==null?CLAVE:claveArg);
@@ -41,7 +43,16 @@ public class Database {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             System.err.println(e.getMessage());
             System.exit(-1);
-        } 
+        }
+        return null;*/
+        try {
+            javax.naming.InitialContext ctx = new javax.naming.InitialContext();
+            javax.sql.DataSource ds = (javax.sql.DataSource)ctx.lookup("jdbc/MUNI_DESA");
+            java.sql.Connection conn = ds.getConnection();
+            return conn;
+        } catch (NamingException | SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
     
